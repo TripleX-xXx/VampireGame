@@ -17,10 +17,12 @@ public class Moving : MonoBehaviour
         cr.MovePosition(p);
     }
 
-    // Update is called once per frame
-    void Update()
+    public enum Site {left = 1, right = 2, up = 3, down = 4};
+
+    public bool Move(Site site)
     {
         p = player.transform.position;
+        //cr.MovePosition(p);
 
         Vector3 up = new Vector3(p.x, p.y + 0.17f, p.z);
         Vector3 down = new Vector3(p.x, p.y - 0.17f, p.z);
@@ -60,26 +62,43 @@ public class Moving : MonoBehaviour
 
         Rigidbody2D r = player.GetComponent<Rigidbody2D>();
 
-        if (Input.GetKeyDown("a"))
+        if (site == Site.left)
         {
             r.MoveRotation(90);
-            if(flagLeft) r.MovePosition(new Vector2(p.x - 0.32f, p.y));
+            if (flagLeft)
+            {
+                r.MovePosition(new Vector2(p.x - 0.32f, p.y));
+                return true;
+            }
         }
-       else if (Input.GetKeyDown("d"))
+       else if (site == Site.right)
         {
             r.MoveRotation(-90);
-            if (flagRight) r.MovePosition(new Vector2(p.x + 0.32f, p.y));
+            if (flagRight)
+            {
+                r.MovePosition(new Vector2(p.x + 0.32f, p.y));
+                return true;
+            }
         }
-       else if (Input.GetKeyDown("w"))
+       else if (site == Site.up)
         {
             r.MoveRotation(0);
-            if (flagUp) r.MovePosition(new Vector2(p.x, p.y + 0.32f));
+            if (flagUp)
+            {
+                r.MovePosition(new Vector2(p.x, p.y + 0.32f));
+                return true;
+            }
         }
-        else if (Input.GetKeyDown("s"))
+        else if (site == Site.down)
         {
             r.MoveRotation(180);
-            if (flagDown) r.MovePosition(new Vector2(p.x, p.y - 0.32f));
+            if (flagDown)
+            {
+                r.MovePosition(new Vector2(p.x, p.y - 0.32f));
+                return true;
+            }
         }
-        cr.MovePosition(p);
+        return false;
+
     }
 }
