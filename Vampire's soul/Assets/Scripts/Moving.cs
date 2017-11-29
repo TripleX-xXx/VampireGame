@@ -5,24 +5,28 @@ using UnityEngine;
 public class Moving : MonoBehaviour
 {
 
-    public GameObject player;
     public GameObject camerad;
     private Rigidbody2D cr;
     private Vector3 p;
 
-    private void Start()
+    public void SetPlayer(MG_Person go) {
+        //player = go;
+    }
+
+    public void SetUp()
     {
         cr = camerad.GetComponent<Rigidbody2D>();
-        p = player.transform.position;
-        cr.MovePosition(p);
+        //p = player.transform.position;
+        //cr.MovePosition(p);
     }
 
     public enum Site {left = 1, right = 2, up = 3, down = 4};
 
-    public bool Move(Site site)
+    public bool Move(MG_Person player,Site site)
     {
+        cr = camerad.GetComponent<Rigidbody2D>();
         p = player.transform.position;
-        //cr.MovePosition(p);
+        cr.MovePosition(p);
 
         Vector3 up = new Vector3(p.x, p.y + 0.17f, p.z);
         Vector3 down = new Vector3(p.x, p.y - 0.17f, p.z);
