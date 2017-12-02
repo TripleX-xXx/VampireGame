@@ -56,7 +56,7 @@ public class MG_Hero : MG_Person {
         flagMove = !flagMove;
         return true;
     }
-    /*
+    
     private void Update()
     {
         if (Input.GetKeyDown("a"))
@@ -83,5 +83,5 @@ public class MG_Hero : MG_Person {
         }
 
     }
-    */
+    
 }
