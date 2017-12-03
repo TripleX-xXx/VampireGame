@@ -6,16 +6,12 @@ public class Moving : MonoBehaviour
 {
 
     public GameObject camerad;
-    private Rigidbody2D cr;
+    private Rigidbody cr;
     private Vector3 p;
-
-    public void SetPlayer(MG_Person go) {
-        //player = go;
-    }
 
     public void SetUp()
     {
-        cr = camerad.GetComponent<Rigidbody2D>();
+        cr = camerad.GetComponent<Rigidbody>();
         //p = player.transform.position;
         //cr.MovePosition(p);
     }
@@ -24,9 +20,9 @@ public class Moving : MonoBehaviour
 
     public bool Move(MG_Person player,Site site)
     {
-        cr = camerad.GetComponent<Rigidbody2D>();
+        cr = camerad.GetComponent<Rigidbody>();
         p = player.transform.position;
-        cr.MovePosition(p);
+        cr.MovePosition(new Vector3(p.x, p.y, -10));
 
         Vector3 up = new Vector3(p.x, p.y + 0.17f, p.z);
         Vector3 down = new Vector3(p.x, p.y - 0.17f, p.z);
@@ -43,62 +39,66 @@ public class Moving : MonoBehaviour
         bool flagLeft = true;
         bool flagRight = true;
 
-        if (Physics2D.Raycast(up, Vector2.up, 0.17f))
+        if (Physics.Raycast(up, Vector2.up, 0.17f))
         {
             //print("up");
             flagUp = false;
         }
-        if (Physics2D.Raycast(down, Vector2.down, 0.17f))
+        if (Physics.Raycast(down, Vector2.down, 0.17f))
         {
             //print("down");
             flagDown = false;
         }
-        if (Physics2D.Raycast(left, Vector2.left, 0.17f))
+        if (Physics.Raycast(left, Vector2.left, 0.17f))
         {
             //print("left");
             flagLeft = false;
         }
-        if (Physics2D.Raycast(right, Vector2.right, 0.17f))
+        if (Physics.Raycast(right, Vector2.right, 0.17f))
         {
             //print("right");
             flagRight = false;
         }
 
-        Rigidbody2D r = player.GetComponent<Rigidbody2D>();
+        Rigidbody r = player.GetComponent<Rigidbody>();
 
         if (site == Site.left)
         {
-            r.MoveRotation(90);
+            //r.MoveRotation(90);
+            r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 90)));
             if (flagLeft)
             {
-                r.MovePosition(new Vector2(p.x - 0.32f, p.y));
+                r.MovePosition(new Vector3(p.x - 0.32f, p.y));
                 return true;
             }
         }
        else if (site == Site.right)
         {
-            r.MoveRotation(-90);
+            //r.MoveRotation(-90);
+            r.MoveRotation(Quaternion.Euler(new Vector3(0,0,-90)));
             if (flagRight)
             {
-                r.MovePosition(new Vector2(p.x + 0.32f, p.y));
+                r.MovePosition(new Vector3(p.x + 0.32f, p.y));
                 return true;
             }
         }
        else if (site == Site.up)
         {
-            r.MoveRotation(0);
+            //r.MoveRotation(0);
+            r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 0)));
             if (flagUp)
             {
-                r.MovePosition(new Vector2(p.x, p.y + 0.32f));
+                r.MovePosition(new Vector3(p.x, p.y + 0.32f));
                 return true;
             }
         }
         else if (site == Site.down)
         {
-            r.MoveRotation(180);
+            //r.MoveRotation(180);
+            r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 180)));
             if (flagDown)
             {
-                r.MovePosition(new Vector2(p.x, p.y - 0.32f));
+                r.MovePosition(new Vector3(p.x, p.y - 0.32f));
                 return true;
             }
         }
