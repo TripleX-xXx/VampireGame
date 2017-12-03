@@ -4,101 +4,80 @@ using UnityEngine;
 
 public class Moving : MonoBehaviour
 {
+    public enum Site { left, right, up, down };
 
-    public GameObject camerad;
-    private Rigidbody cr;
-    private Vector3 p;
+    public GameObject camerad; //focused camera
+    private Rigidbody r; //player's rigidbody
+    private Rigidbody cr; //camera's rigidbody
+    private Vector3 p; //position of moving object
+    private float cellSize = 0.32f; //grid cell size
 
-    public void SetUp()
-    {
-        cr = camerad.GetComponent<Rigidbody>();
-        //p = player.transform.position;
-        //cr.MovePosition(p);
-    }
-
-    public enum Site {left = 1, right = 2, up = 3, down = 4};
-
+    /*
+    *  moves the object one cell in a given direction
+    *  return true if object could be moved
+    *  player - object to moved
+    *  site - page in which the object is to be moved
+    */
     public bool Move(MG_Person player,Site site)
     {
+        r = player.GetComponent<Rigidbody>();
         cr = camerad.GetComponent<Rigidbody>();
         p = player.transform.position;
         cr.MovePosition(new Vector3(p.x, p.y, -10));
 
-        Vector3 up = new Vector3(p.x, p.y + 0.17f, p.z);
-        Vector3 down = new Vector3(p.x, p.y - 0.17f, p.z);
-        Vector3 left = new Vector3(p.x - 0.17f, p.y, p.z);
-        Vector3 right = new Vector3(p.x + 0.17f, p.y, p.z);
+        Vector3 up = new Vector3(p.x, p.y + (cellSize / 2 + 0.01f), p.z);
+        Vector3 down = new Vector3(p.x, p.y -(cellSize / 2 + 0.01f), p.z);
+        Vector3 left = new Vector3(p.x -(cellSize / 2 + 0.01f), p.y, p.z);
+        Vector3 right = new Vector3(p.x + (cellSize / 2 + 0.01f), p.y, p.z);
 
-        Debug.DrawRay(up, new Vector3(0, 0.17f, 0), Color.green);
-        Debug.DrawRay(down, new Vector3(0, -0.17f, 0), Color.green);
-        Debug.DrawRay(right, new Vector3(0.17f, 0, 0), Color.green);
-        Debug.DrawRay(left, new Vector3(-0.17f, 0, 0), Color.green);
+        Debug.DrawRay(up, new Vector3(0, (cellSize / 2 + 0.01f), 0), Color.green);
+        Debug.DrawRay(down, new Vector3(0, -(cellSize / 2 + 0.01f), 0), Color.green);
+        Debug.DrawRay(right, new Vector3((cellSize / 2 + 0.01f), 0, 0), Color.green);
+        Debug.DrawRay(left, new Vector3(-(cellSize / 2 + 0.01f), 0, 0), Color.green);
 
         bool flagUp = true;
         bool flagDown = true;
         bool flagLeft = true;
         bool flagRight = true;
 
-        if (Physics.Raycast(up, Vector2.up, 0.17f))
-        {
-            //print("up");
-            flagUp = false;
-        }
-        if (Physics.Raycast(down, Vector2.down, 0.17f))
-        {
-            //print("down");
-            flagDown = false;
-        }
-        if (Physics.Raycast(left, Vector2.left, 0.17f))
-        {
-            //print("left");
-            flagLeft = false;
-        }
-        if (Physics.Raycast(right, Vector2.right, 0.17f))
-        {
-            //print("right");
-            flagRight = false;
-        }
-
-        Rigidbody r = player.GetComponent<Rigidbody>();
+        if (Physics.Raycast(up, Vector3.up, (cellSize / 2 + 0.01f))) flagUp = false;
+        if (Physics.Raycast(down, Vector3.down, (cellSize / 2 + 0.01f))) flagDown = false;
+        if (Physics.Raycast(left, Vector3.left, (cellSize / 2 + 0.01f))) flagLeft = false;
+        if (Physics.Raycast(right, Vector3.right, (cellSize / 2 + 0.01f))) flagRight = false;
 
         if (site == Site.left)
         {
-            //r.MoveRotation(90);
             r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 90)));
             if (flagLeft)
             {
-                r.MovePosition(new Vector3(p.x - 0.32f, p.y));
+                r.MovePosition(new Vector3(p.x - cellSize, p.y));
                 return true;
             }
         }
        else if (site == Site.right)
         {
-            //r.MoveRotation(-90);
             r.MoveRotation(Quaternion.Euler(new Vector3(0,0,-90)));
             if (flagRight)
             {
-                r.MovePosition(new Vector3(p.x + 0.32f, p.y));
+                r.MovePosition(new Vector3(p.x + cellSize, p.y));
                 return true;
             }
         }
        else if (site == Site.up)
         {
-            //r.MoveRotation(0);
             r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 0)));
             if (flagUp)
             {
-                r.MovePosition(new Vector3(p.x, p.y + 0.32f));
+                r.MovePosition(new Vector3(p.x, p.y + cellSize));
                 return true;
             }
         }
         else if (site == Site.down)
         {
-            //r.MoveRotation(180);
             r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 180)));
             if (flagDown)
             {
-                r.MovePosition(new Vector3(p.x, p.y - 0.32f));
+                r.MovePosition(new Vector3(p.x, p.y - cellSize));
                 return true;
             }
         }

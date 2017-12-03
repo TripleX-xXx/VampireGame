@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class MG_Person : MonoBehaviour {
 
-    public GameObject scriptHolding;
+    public GameObject scriptHolding; //gameObject with moving script
 
-    abstract public bool Move();
+    abstract public bool Move(); // method to move
 }

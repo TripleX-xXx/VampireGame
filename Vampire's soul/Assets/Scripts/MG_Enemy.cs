@@ -17,11 +17,9 @@ public class MG_Enemy : MG_Person {
     }
 
     //bool flagMove = false;
-
+    
+    //simple AI
     public override bool Move() {
-        //Set();
-        //m.SetPlayer(this);
-        //m.SetUp();
         if (m.Move(this, Moving.Site.left)) ;
         else if (m.Move(this, Moving.Site.right)) ;
         else if (m.Move(this, Moving.Site.up)) ;
