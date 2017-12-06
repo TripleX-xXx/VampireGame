@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MG_Hero : MG_Person {
+public class MG_Hero : MG_Person
+{
 
     public Image health_bar;
 
     private Moving m;
     private int maxHP = 100;
     public int hp = 100;
+    public GameObject posi;
+    public BaseObj basse;
+    public Vector3 pos;
 
     private void Start()
     {
         m = scriptHolding.GetComponent<Moving>();
+        playerInstance = this;
+        pos = this.GetComponent<Transform>().position;
     }
 
     public void TakeDmg(int dmg)
@@ -24,11 +30,13 @@ public class MG_Hero : MG_Person {
 
     bool flagMove = false;
 
-    public override bool Move() {
+    public override bool Move()
+    {
         //Set();
         //m.SetPlayer(this);
         //m.SetUp();
-        while (!flagMove) {
+        while (!flagMove)
+        {
 
             if (Input.GetKeyDown("a"))
             {
@@ -49,31 +57,40 @@ public class MG_Hero : MG_Person {
 
             if (flagMove)
             {
-                TakeDmg(1);  
+                TakeDmg(1);
             }
 
         }
+        InitStep();
         flagMove = !flagMove;
         return true;
     }
-    
+    public void InitStep()
+    {
+        UpdateStep();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown("a"))
         {
             flagMove = m.Move(this, Moving.Site.left);
+            InitStep();
         }
         else if (Input.GetKeyDown("d"))
         {
             flagMove = m.Move(this, Moving.Site.right);
+            InitStep();
         }
         else if (Input.GetKeyDown("w"))
         {
             flagMove = m.Move(this, Moving.Site.up);
+            InitStep();
         }
         else if (Input.GetKeyDown("s"))
         {
             flagMove = m.Move(this, Moving.Site.down);
+            InitStep();
         }
 
         if (flagMove)
@@ -83,5 +100,5 @@ public class MG_Hero : MG_Person {
         }
 
     }
-    
+
 }
