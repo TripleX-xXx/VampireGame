@@ -1,16 +1,4 @@
-<<<<<<< HEAD
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public abstract class MG_Person : MonoBehaviour {
-
-    public GameObject scriptHolding; //gameObject with moving script
-
-    abstract public bool Move(); // method to move
-}
-=======
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -58,4 +46,3 @@ public abstract class MG_Person : MonoBehaviour
         return Mathf.CeilToInt(Vector2.Distance(new Vector2(position.x, position.z), new Vector2(playerPos.x, playerPos.z)));
     }
 }
->>>>>>> master
