@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,23 +36,18 @@ public class MG_Enemy : MG_Person
         yield return new WaitForSeconds(1f);
         StartCoroutine(MovementTest());
     }
-    //bool flagMove = false;
 
     public override bool Move()
     {
-        //Set();
-        //m.SetPlayer(this);
-        //m.SetUp();
-        if (m.Move(this, Moving.Site.left)) ;
+        if (m.Move(this, Moving.Site.up)) ;
         else if (m.Move(this, Moving.Site.right)) ;
-        else if (m.Move(this, Moving.Site.up)) ;
+        else if (m.Move(this, Moving.Site.left)) ;
         else if (m.Move(this, Moving.Site.down)) ;
         return true;
     }
 
     public void Movement()
     {
-
         m.Move(this, Moving.Site.up);
     }
 
@@ -63,8 +58,8 @@ public class MG_Enemy : MG_Person
 
         //For each action it have, do a action
 
-        Movement();
-
+        //Movement();
+        Move();
 
     }
     //Can it see the player?
@@ -121,6 +116,26 @@ public class MG_Enemy : MG_Person
         //  else
         //      return opt2;
 
+    }
+
+    public void TakeDmg(int dmg)
+    {
+        hp -= dmg;
+        health_bar.fillAmount = (float)hp / maxHp;
+    }
+
+    protected override void Attack()
+    {
+        RaycastHit hit;
+        Vector3 site = Vector3.up;
+        Vector3 q = GetComponent<Transform>().eulerAngles;
+        if (q.z > -0.1 && q.z < 0.1) site = Vector3.up;
+        else if (q.z > 89 && q.z < 91) site = Vector3.left;
+        else if ((q.z > -91 && q.z < -89) || (q.z > 269 && q.z < 271)) site = Vector3.right;
+        else if (q.z > 179 && q.z < 181) site = Vector3.down;
+        if (Physics.Raycast(transform.position, site, out hit, 1f)) {
+            if (hit.collider.tag == "Player") hit.collider.gameObject.GetComponent<MG_Hero>().TakeDmg(10);
+        }
     }
 
 }
