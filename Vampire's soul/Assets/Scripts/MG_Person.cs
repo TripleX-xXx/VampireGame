@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class MG_Person : MonoBehaviour
 {
 
     public GameObject scriptHolding;
     public static MG_Hero playerInstance;
+    protected int maxHp = 100;
+    protected int hp = 100;
+    public Image health_bar;
 
     abstract public bool Move();
+    abstract protected void Attack();
+    
     public IntVector2 Position()
     {
         //Position on the game grid will be the Unity position, but rounded to the nearest Int
@@ -24,14 +30,14 @@ public abstract class MG_Person : MonoBehaviour
     public static void UpdateStep()
     {
         MG_Enemy[] objs = GameObject.FindObjectsOfType<MG_Enemy>();
-        Debug.Log(objs);
+        //Debug.Log(objs);
         //Fist update the enemies, they can move and attack.
         for (int i = 0; i < objs.Length; i++)
         {
 
 
             objs[i].OnnStep();
-            Debug.Log(i);
+            //Debug.Log(i);
         }
     }
 
