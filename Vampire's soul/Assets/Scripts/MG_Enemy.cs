@@ -107,14 +107,14 @@ public class MG_Enemy : MG_Person
         Moving.Site opt2;
 
         //If the direction X is closer than Z, choose left or right for the first option, and up or down for the second option
-        if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+        if (Mathf.Abs(dir.x) > Mathf.Abs(dir.z))
         {
             if (dir.x < 0)
                 opt1 = Moving.Site.right;
             else
                 opt1 = Moving.Site.left;
 
-            if (dir.y < 0)
+            if (dir.z < 0)
                 opt2 = Moving.Site.up;
             else
                 opt2 = Moving.Site.down;
@@ -122,7 +122,7 @@ public class MG_Enemy : MG_Person
         //Else, do the oposite
         else
         {
-            if (dir.y < 0)
+            if (dir.z < 0)
                 opt1 = Moving.Site.up;
             else
                 opt1 = Moving.Site.down;
@@ -149,7 +149,7 @@ public class MG_Enemy : MG_Person
         IntVector2 playerPos = obj.Position();
       //  Debug.Log(position);
        // Debug.Log(playerPos);
-        return Mathf.CeilToInt(Vector3.Distance(new Vector3(position.x, position.y), new Vector2(playerPos.x, playerPos.y)));
+        return Mathf.CeilToInt(Vector3.Distance(new Vector3(position.x, position.z), new Vector2(playerPos.x, playerPos.z)));
     }
 
     public void TakeDmg(float dmg)
