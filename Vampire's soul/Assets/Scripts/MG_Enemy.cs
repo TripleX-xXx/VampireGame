@@ -155,6 +155,10 @@ public class MG_Enemy : MG_Person
     public void TakeDmg(float dmg)
     {
         hp -= dmg;
+        if (this.hp <= 0)
+        {
+            Die(this);
+        }
         //    health_bar.fillAmount = (float)hp / maxHP;
     }
 
@@ -163,6 +167,7 @@ public class MG_Enemy : MG_Person
         RaycastHit hit;
         Vector3 site = Vector3.up;
         Vector3 q = GetComponent<Transform>().eulerAngles;
+        //You watch in front 
         if (q.z > -0.1 && q.z < 0.1) site = Vector3.up;
         else if (q.z > 89 && q.z < 91) site = Vector3.left;
         else if ((q.z > -91 && q.z < -89) || (q.z > 269 && q.z < 271)) site = Vector3.right;
