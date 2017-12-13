@@ -10,7 +10,8 @@ public class Moving : MonoBehaviour
     private Rigidbody r; //player's rigidbody
     private Rigidbody cr; //camera's rigidbody
     private Vector3 p; //position of moving object
-    private float cellSize = 1f; //grid cell size
+    public float cellSize = 1f; //grid cell size
+    public Vector2 camPosition;
     public void SetPlayer(MG_Person go)
     {
         //player = go;
@@ -59,33 +60,29 @@ public class Moving : MonoBehaviour
         cr = camerad.GetComponent<Rigidbody>();
         p = player.transform.position;
         if (player.tag == "Player")
-            cr.MovePosition(new Vector3(p.x, p.y, -10));
+            cr.MovePosition(new Vector3(p.x + camPosition.x, p.y + camPosition.y, -10));
 
         Ray rayUp = new Ray(p, Vector3.up);
         Ray rayDown = new Ray(p, Vector3.down);
         Ray rayLeft = new Ray(p, Vector3.left);
         Ray rayRight = new Ray(p, Vector3.right);
 
-        Vector3 up = new Vector3(p.x, p.y + (cellSize / 2 + 0.01f), p.z);
-        Vector3 down = new Vector3(p.x, p.y - (cellSize / 2 + 0.01f), p.z);
-        Vector3 left = new Vector3(p.x - (cellSize / 2 + 0.01f), p.y, p.z);
-        Vector3 right = new Vector3(p.x + (cellSize / 2 + 0.01f), p.y, p.z);
-        Vector3 none = new Vector3(p.x, p.y, p.z);
-
-        Debug.DrawRay(up, new Vector3(0, (cellSize / 2 + 0.01f), 0), Color.green);
-        Debug.DrawRay(down, new Vector3(0, -(cellSize / 2 + 0.01f), 0), Color.green);
-        Debug.DrawRay(right, new Vector3((cellSize / 2 + 0.01f), 0, 0), Color.green);
-        Debug.DrawRay(left, new Vector3(-(cellSize / 2 + 0.01f), 0, 0), Color.green);
+        Debug.DrawRay(p, Vector3.up * cellSize, Color.green);
+        Debug.DrawRay(p, Vector3.down * cellSize, Color.green);
+        Debug.DrawRay(p, Vector3.left * cellSize, Color.green);
+        Debug.DrawRay(p, Vector3.right * cellSize, Color.green);
 
         bool flagUp = true;
         bool flagDown = true;
         bool flagLeft = true;
         bool flagRight = true;
 
-        if (Physics.Raycast(up, Vector3.up, (cellSize / 2 + 0.01f))) flagUp = false;
-        if (Physics.Raycast(down, Vector3.down, (cellSize / 2 + 0.01f))) flagDown = false;
-        if (Physics.Raycast(left, Vector3.left, (cellSize / 2 + 0.01f))) flagLeft = false;
-        if (Physics.Raycast(right, Vector3.right, (cellSize / 2 + 0.01f))) flagRight = false;
+        if (Physics.Raycast(rayUp, cellSize)) flagUp = false;
+        if (Physics.Raycast(rayDown, cellSize)) flagDown = false;
+        if (Physics.Raycast(rayLeft, cellSize)) flagLeft = false;
+        if (Physics.Raycast(rayRight, cellSize)) flagRight = false;
+
+        //if(player.tag == "Player")Debug.Log("Up:"+flagUp+" Down:"+flagDown+" Left:"+flagLeft+" Right:"+flagRight);
 
         if (site == Site.left)
         {
@@ -120,14 +117,6 @@ public class Moving : MonoBehaviour
             if (flagDown)
             {
                 r.MovePosition(new Vector3(p.x, p.y - cellSize));
-                return true;
-            }
-        }
-        else if (site == Site.none)
-        {
-            if (flagDown)
-            {
-                r.MovePosition(new Vector3(p.x, p.y));
                 return true;
             }
         }

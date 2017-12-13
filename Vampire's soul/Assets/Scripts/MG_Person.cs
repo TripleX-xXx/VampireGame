@@ -7,10 +7,9 @@ public abstract class MG_Person : MonoBehaviour
 {
 
     public GameObject scriptHolding;
-    public  MG_Hero playerInstance;
-    public MG_Enemy enemyInstance;
     public float maxHP = 100;
     public float currHP = 100;
+    public Image health_bar;
 
     abstract public bool Move();
     abstract protected void Attack();
@@ -39,9 +38,9 @@ public abstract class MG_Person : MonoBehaviour
         }
     }
 
-    public void Die(MG_Person obj)
+    public void Die()
     {
-            Destroy(obj.gameObject);
+            Destroy(this.gameObject);
             //GameOver();
     }
 }

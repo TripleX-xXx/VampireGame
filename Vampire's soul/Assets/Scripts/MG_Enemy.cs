@@ -26,7 +26,6 @@ public class MG_Enemy : MG_Person
     private void Start()
     {
         m = scriptHolding.GetComponent<Moving>();
-        enemyInstance = this;
         //Give initial position
         e_posit = Position();
         //  StartCoroutine(MovementTest());
@@ -53,11 +52,12 @@ public class MG_Enemy : MG_Person
     }
     public void AttackE(MG_Hero P, float dmg)
     {
-        P.hp = P.hp - dmg;
-        if (P.hp <= 0)
+        //P.hp = P.hp - dmg;
+        P.TakeDmg(dmg);
+        /*if (P.hp <= 0)
         {
             Die(P);
-        }
+        }*/
     }
 
 
@@ -73,8 +73,8 @@ public class MG_Enemy : MG_Person
             //If close to player
             if (distanceToAttack == DistanceFromObject(hero))
             {
-                AttackE(hero, 1); 
-                //Attack();
+                //AttackE(hero, 1); 
+                Attack();
             } else
                 //if you see but far away
                 m.Move(this, DirectionToObj(hero));
@@ -154,12 +154,12 @@ public class MG_Enemy : MG_Person
 
     public void TakeDmg(float dmg)
     {
-        hp -= dmg;
-        if (this.hp <= 0)
+        currHP -= dmg;
+        if (currHP <= 0)
         {
-            Die(this);
+            Die();
         }
-        //    health_bar.fillAmount = (float)hp / maxHP;
+        health_bar.fillAmount = (float)currHP / maxHP;
     }
 
     protected override void Attack()
