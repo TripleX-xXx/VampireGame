@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MG_Hero : MG_Person
 {
 
-    private Moving m;
+    private MG_Moving m;
     public MG_Enemy enemy;
     public int atkRange = 1;
 
@@ -15,7 +15,7 @@ public class MG_Hero : MG_Person
 
     private void Start()
     {
-        m = scriptHolding.GetComponent<Moving>();
+        m = scriptHolding.GetComponent<MG_Moving>();
         //  pos = this.GetComponent<Transform>().position;
 
         
@@ -41,20 +41,20 @@ public class MG_Hero : MG_Person
 
             if (Input.GetKeyDown("a"))
             {
-                flagMove = m.Move(this, Moving.Site.left);
+                flagMove = m.Move(this, MG_Moving.Site.left);
                 
             }
             else if (Input.GetKeyDown("d"))
             {
-                flagMove = m.Move(this, Moving.Site.right);
+                flagMove = m.Move(this, MG_Moving.Site.right);
             }
             else if (Input.GetKeyDown("w"))
             {
-                flagMove = m.Move(this, Moving.Site.up);
+                flagMove = m.Move(this, MG_Moving.Site.up);
             }
             else if (Input.GetKeyDown("s"))
             {
-                flagMove = m.Move(this, Moving.Site.down);
+                flagMove = m.Move(this, MG_Moving.Site.down);
             }
 
             if (flagMove)
@@ -92,25 +92,25 @@ public class MG_Hero : MG_Person
 
                 if (Input.GetKeyDown("a"))
                 {
-                    flagMove = m.Move(this, Moving.Site.left);
+                    flagMove = m.Move(this, MG_Moving.Site.left);
                     //InitStep();
                     //flagR = true;
                 }
                 else if (Input.GetKeyDown("d"))
                 {
-                    flagMove = m.Move(this, Moving.Site.right);
+                    flagMove = m.Move(this, MG_Moving.Site.right);
                 //InitStep();
                 //flagR = true;
             }
                 else if (Input.GetKeyDown("w"))
                 {
-                    flagMove = m.Move(this, Moving.Site.up);
+                    flagMove = m.Move(this, MG_Moving.Site.up);
                 //InitStep();
                 //flagR = true;
             }
                 else if (Input.GetKeyDown("s"))
                 {
-                    flagMove = m.Move(this, Moving.Site.down);
+                    flagMove = m.Move(this, MG_Moving.Site.down);
                 //InitStep();
                 //flagR = true;
             } 

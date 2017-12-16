@@ -8,7 +8,7 @@ public class MG_Enemy : MG_Person
 
     //public Image health_bar;
     public MG_Hero hero;
-    private Moving m;
+    private MG_Moving m;
 
 
     //private float maxHP = 100;
@@ -25,7 +25,7 @@ public class MG_Enemy : MG_Person
 
     private void Start()
     {
-        m = scriptHolding.GetComponent<Moving>();
+        m = scriptHolding.GetComponent<MG_Moving>();
         //Give initial position
         e_posit = Position();
         //  StartCoroutine(MovementTest());
@@ -33,7 +33,7 @@ public class MG_Enemy : MG_Person
     //Keep moving the NPC, for debugging
     public IEnumerator MovementTest()
     {
-        m.Move(this, Moving.Site.up);
+        m.Move(this, MG_Moving.Site.up);
         yield return new WaitForSeconds(1f);
         StartCoroutine(MovementTest());
     }
@@ -44,10 +44,10 @@ public class MG_Enemy : MG_Person
         //Set();
         //m.SetPlayer(this);
         //m.SetUp();
-        if (m.Move(this, Moving.Site.left)) ;
-        else if (m.Move(this, Moving.Site.right)) ;
-        else if (m.Move(this, Moving.Site.up)) ;
-        else if (m.Move(this, Moving.Site.down)) ;
+        if (m.Move(this, MG_Moving.Site.left)) ;
+        else if (m.Move(this, MG_Moving.Site.right)) ;
+        else if (m.Move(this, MG_Moving.Site.up)) ;
+        else if (m.Move(this, MG_Moving.Site.down)) ;
         return true;
     }
     public void AttackE(MG_Hero P, float dmg)
@@ -92,45 +92,45 @@ public class MG_Enemy : MG_Person
 
 
     //Choose side where to go to get closer to enemy
-    public Moving.Site DirectionToObj(MG_Hero obj)
+    public MG_Moving.Site DirectionToObj(MG_Hero obj)
     {
 
         if (obj == null)
-            return Moving.Site.none;
+            return MG_Moving.Site.none;
 
         IntVector2 position = Position();
         IntVector2 dir = position - obj.posit;
 
 
         //There will be two options to move, if can't go to opt1, will go to opt2
-        Moving.Site opt1;
-        Moving.Site opt2;
+        MG_Moving.Site opt1;
+        MG_Moving.Site opt2;
 
         //If the direction X is closer than Z, choose left or right for the first option, and up or down for the second option
         if (Mathf.Abs(dir.x) > Mathf.Abs(dir.z))
         {
             if (dir.x < 0)
-                opt1 = Moving.Site.right;
+                opt1 = MG_Moving.Site.right;
             else
-                opt1 = Moving.Site.left;
+                opt1 = MG_Moving.Site.left;
 
             if (dir.z < 0)
-                opt2 = Moving.Site.up;
+                opt2 = MG_Moving.Site.up;
             else
-                opt2 = Moving.Site.down;
+                opt2 = MG_Moving.Site.down;
         }
         //Else, do the oposite
         else
         {
             if (dir.z < 0)
-                opt1 = Moving.Site.up;
+                opt1 = MG_Moving.Site.up;
             else
-                opt1 = Moving.Site.down;
+                opt1 = MG_Moving.Site.down;
 
             if (dir.x < 0)
-                opt2 = Moving.Site.right;
+                opt2 = MG_Moving.Site.right;
             else
-                opt2 = Moving.Site.left;
+                opt2 = MG_Moving.Site.left;
         }
         //If there is a obstacle for opt1, go to opt2.
         //If there is a obstacle of opt2, the Move Func will not let him move, so he will stay in the same place;
