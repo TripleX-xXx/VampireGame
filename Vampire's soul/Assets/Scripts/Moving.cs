@@ -1,126 +1,87 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Moving : MonoBehaviour
-{
+[RequireComponent(typeof(Rigidbody))]
 
+public class Moving : MonoBehaviour {
 
-    public GameObject camerad; //focused camera
-    private Rigidbody r; //player's rigidbody
-    private Rigidbody cr; //camera's rigidbody
-    private Vector3 p; //position of moving object
-    public float cellSize = 1f; //grid cell size
-    public Vector2 camPosition;
-    public void SetPlayer(MG_Person go)
+    public bool flagDebug = false; // on/off debug mode
+
+    public float cellSize = 1f; // grid cell size
+    private Rigidbody r; // rigidbody of moving object
+    private Vector3 p; // position of moving object
+
+    private bool[] freeSidesTab = { /*Up*/true, /*Down*/true, /*Left*/true, /*Right*/true };
+
+    void Awake()
     {
-        //player = go;
+        r = GetComponent<Rigidbody>();
     }
 
-    public void SetUp()
+    public bool Move(MG_Sides.Side side) // turns and move towards 'side' (return true if it can end the move otherwise only rotation)
     {
-        cr = camerad.GetComponent<Rigidbody>();
-        //p = player.transform.position;
-        //cr.MovePosition(p);
-    }
+        if (side == MG_Sides.Side.none) return true;
+        SetFreeSides();
 
-    public enum Site
-    {
-        up,
-        down,
-        left,
-        right,
-        none
-    };
-    //Order need to be the same as SideChoices, is the position each side will have.
-    public static IntVector2[] sideVector = {
-        new IntVector2(0, 1),
-        new IntVector2(0, -1),
-        new IntVector2(-1, 0),
-        new IntVector2(1, 0),
-        new IntVector2(0, 0)
-    };
-    //Transform the enum SideChoices to its respective IntVector2 
-    public static IntVector2 SideToVector(Site side)
-    {
-        return sideVector[(int)side];
-    }
-
-    /*
-*  moves the object one cell in a given direction
-*  return true if object could be moved
-*  player - object to moved
-*  site - page in which the object is to be moved
-*/
-    public bool Move(MG_Person player, Site site)
-    {
-
-
-        r = player.GetComponent<Rigidbody>();
-        cr = camerad.GetComponent<Rigidbody>();
-        p = player.transform.position;
-        if (player.tag == "Player")
-            cr.MovePosition(new Vector3(p.x + camPosition.x, p.y + camPosition.y, -10));
-
-        Ray rayUp = new Ray(p, Vector3.up);
-        Ray rayDown = new Ray(p, Vector3.down);
-        Ray rayLeft = new Ray(p, Vector3.left);
-        Ray rayRight = new Ray(p, Vector3.right);
-
-        Debug.DrawRay(p, Vector3.up * cellSize, Color.green);
-        Debug.DrawRay(p, Vector3.down * cellSize, Color.green);
-        Debug.DrawRay(p, Vector3.left * cellSize, Color.green);
-        Debug.DrawRay(p, Vector3.right * cellSize, Color.green);
-
-        bool flagUp = true;
-        bool flagDown = true;
-        bool flagLeft = true;
-        bool flagRight = true;
-
-        if (Physics.Raycast(rayUp, cellSize)) flagUp = false;
-        if (Physics.Raycast(rayDown, cellSize)) flagDown = false;
-        if (Physics.Raycast(rayLeft, cellSize)) flagLeft = false;
-        if (Physics.Raycast(rayRight, cellSize)) flagRight = false;
-
-        //if(player.tag == "Player")Debug.Log("Up:"+flagUp+" Down:"+flagDown+" Left:"+flagLeft+" Right:"+flagRight);
-
-        if (site == Site.left)
+        if (flagDebug)
         {
-            r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 90)));
-            if (flagLeft)
-            {
-                r.MovePosition(new Vector3(p.x - cellSize, p.y));
-                return true;
-            }
+            Debug.DrawRay(p, Vector3.up * cellSize, Color.green);
+            Debug.DrawRay(p, Vector3.down * cellSize, Color.green);
+            Debug.DrawRay(p, Vector3.left * cellSize, Color.green);
+            Debug.DrawRay(p, Vector3.right * cellSize, Color.green);
+            //Debug.Log("UP:"+freeSidesTab[0] + " DOWN:" + freeSidesTab[1] + " LEFT:" + freeSidesTab[2] + " RIGHT:" + freeSidesTab[3]);
         }
-        else if (site == Site.right)
-        {
-            r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, -90)));
-            if (flagRight)
-            {
-                r.MovePosition(new Vector3(p.x + cellSize, p.y));
-                return true;
-            }
-        }
-        else if (site == Site.up)
+
+        if (side == MG_Sides.EulerVectorToSide(transform.eulerAngles)) {;}
+        else if (side == MG_Sides.Side.up)
         {
             r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 0)));
-            if (flagUp)
-            {
-                r.MovePosition(new Vector3(p.x, p.y + cellSize));
-                return true;
-            }
+            if (!freeSidesTab[0]) return false;
         }
-        else if (site == Site.down)
+        else if (side == MG_Sides.Side.down)
         {
             r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 180)));
-            if (flagDown)
-            {
-                r.MovePosition(new Vector3(p.x, p.y - cellSize));
-                return true;
-            }
+            if (!freeSidesTab[1]) return false;
         }
-        return false;
+        else if (side == MG_Sides.Side.left)
+        {
+            r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 90)));
+            if (!freeSidesTab[2]) return false;
+        }
+        else if (side == MG_Sides.Side.right)
+        {
+            r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, -90)));
+            if (!freeSidesTab[3]) return false;
+        }
+
+        if(freeSidesTab[(int)side]) r.MovePosition(p + MG_Sides.SideToVector3(side) * cellSize);
+        return true;
 
     }
+
+    private void SetFreeSides() // updates freeSidesTab
+    {
+        p = GetComponent<Transform>().position;
+
+        Ray RayUp = new Ray(p, Vector3.up);
+        Ray RayDown = new Ray(p, Vector3.down);
+        Ray RayLeft = new Ray(p, Vector3.left);
+        Ray RayRight = new Ray(p, Vector3.right);
+
+        freeSidesTab[0] = true;
+        freeSidesTab[1] = true;
+        freeSidesTab[2] = true;
+        freeSidesTab[3] = true;
+
+        if (Physics.Raycast(RayUp, cellSize)) freeSidesTab[0] = false;    // up
+        if (Physics.Raycast(RayDown, cellSize)) freeSidesTab[1] = false;  // down
+        if (Physics.Raycast(RayLeft, cellSize)) freeSidesTab[2] = false;  // left
+        if (Physics.Raycast(RayRight, cellSize)) freeSidesTab[3] = false; // right
+    }
+
+    public bool[] GetFreeSides() // returns which sides are free
+    {
+        SetFreeSides();
+        return freeSidesTab;
+    }
+
 }
