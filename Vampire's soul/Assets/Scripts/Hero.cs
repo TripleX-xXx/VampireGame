@@ -2,6 +2,9 @@
 
 public class Hero : Person {
 
+    private delegate float AttackType(Person p);
+    AttackType attack = null;
+
     private void Update()
     {
         if (Input.GetKeyDown("w")) Action(MG_Sides.Side.up);
@@ -9,11 +12,10 @@ public class Hero : Person {
         else if (Input.GetKeyDown("a")) Action(MG_Sides.Side.left);
         else if (Input.GetKeyDown("d")) Action(MG_Sides.Side.right);
         else if (Input.GetKeyDown("k")) Action(MG_Sides.Side.none); // skip round
-        /* not done yet
         else if (Input.GetKeyDown("1")) SetAbilitie(1); // choose skill 1
         else if (Input.GetKeyDown("2")) SetAbilitie(2); // choose skill 2
         else if (Input.GetKeyDown("3")) SetAbilitie(3); // choose skill 3
-        */
+        
     }
 
     private bool flagRoundEnd = false;
@@ -24,10 +26,10 @@ public class Hero : Person {
         else if (side == MG_Sides.EulerVectorToSide(transform.eulerAngles))
         {
             flagRoundEnd = true;
-            if (/*coś == null czyli ruch*/true) flagRoundEnd = GetComponent<Moving>().Move(side);
+            if (attack == null) flagRoundEnd = GetComponent<Moving>().Move(side);
             else
             {
-                // wykonaj "takeDmg(coś())"
+                TakeDmg(attack(this));
             }
         }
         else flagRoundEnd = GetComponent<Moving>().Move(side);
@@ -40,9 +42,14 @@ public class Hero : Person {
 
     }
 
+    int selectetAbilitie = 0;
+
     private void SetAbilitie(int a) // set the selected skill. If it's the same then set movement mode
     {
-        // to implemented
+        if (selectetAbilitie == a) { attack = null; selectetAbilitie = 0; }
+        else if (a == 1) { attack = AttacksList.Attack1; selectetAbilitie = a; }
+        else if (a == 2) { attack = AttacksList.Attack2; selectetAbilitie = a; }
+        else if (a == 3) { attack = AttacksList.Attack3; selectetAbilitie = a; }
     }
 
     public void InitStep()
