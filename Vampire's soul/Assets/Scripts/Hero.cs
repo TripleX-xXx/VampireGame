@@ -2,6 +2,10 @@
 
 public class Hero : Person {
 
+    //Position of player on grid
+    public IntVector2 posit;
+
+
     private void Update()
     {
         if (Input.GetKeyDown("w")) Action(MG_Sides.Side.up);
@@ -34,6 +38,7 @@ public class Hero : Person {
 
         if(flagRoundEnd)
         {
+            posit = Position();
             flagRoundEnd = false;
             InitStep();
         }
