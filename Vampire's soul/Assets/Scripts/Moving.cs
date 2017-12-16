@@ -1,108 +1,87 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Moving : MonoBehaviour
-{
+[RequireComponent(typeof(Rigidbody))]
 
-    public GameObject camerad;
-    private Rigidbody2D cr;
-    private Vector3 p;
+public class Moving : MonoBehaviour {
 
-    public void SetPlayer(MG_Person go) {
-        //player = go;
-    }
+    public bool flagDebug = false; // on/off debug mode
 
-    public void SetUp()
+    public float cellSize = 1f; // grid cell size
+    private Rigidbody r; // rigidbody of moving object
+    private Vector3 p; // position of moving object
+
+    private bool[] freeSidesTab = { /*Up*/true, /*Down*/true, /*Left*/true, /*Right*/true };
+
+    void Awake()
     {
-        cr = camerad.GetComponent<Rigidbody2D>();
-        //p = player.transform.position;
-        //cr.MovePosition(p);
+        r = GetComponent<Rigidbody>();
     }
 
-    public enum Site {left = 1, right = 2, up = 3, down = 4};
-
-    public bool Move(MG_Person player,Site site)
+    public bool Move(MG_Sides.Side side) // turns and move towards 'side' (return true if it can end the move otherwise only rotation)
     {
-        cr = camerad.GetComponent<Rigidbody2D>();
-        p = player.transform.position;
-        cr.MovePosition(p);
+        if (side == MG_Sides.Side.none) return true;
+        SetFreeSides();
 
-        Vector3 up = new Vector3(p.x, p.y + 0.17f, p.z);
-        Vector3 down = new Vector3(p.x, p.y - 0.17f, p.z);
-        Vector3 left = new Vector3(p.x - 0.17f, p.y, p.z);
-        Vector3 right = new Vector3(p.x + 0.17f, p.y, p.z);
-
-        Debug.DrawRay(up, new Vector3(0, 0.17f, 0), Color.green);
-        Debug.DrawRay(down, new Vector3(0, -0.17f, 0), Color.green);
-        Debug.DrawRay(right, new Vector3(0.17f, 0, 0), Color.green);
-        Debug.DrawRay(left, new Vector3(-0.17f, 0, 0), Color.green);
-
-        bool flagUp = true;
-        bool flagDown = true;
-        bool flagLeft = true;
-        bool flagRight = true;
-
-        if (Physics2D.Raycast(up, Vector2.up, 0.17f))
+        if (flagDebug)
         {
-            //print("up");
-            flagUp = false;
-        }
-        if (Physics2D.Raycast(down, Vector2.down, 0.17f))
-        {
-            //print("down");
-            flagDown = false;
-        }
-        if (Physics2D.Raycast(left, Vector2.left, 0.17f))
-        {
-            //print("left");
-            flagLeft = false;
-        }
-        if (Physics2D.Raycast(right, Vector2.right, 0.17f))
-        {
-            //print("right");
-            flagRight = false;
+            Debug.DrawRay(p, Vector3.up * cellSize, Color.green);
+            Debug.DrawRay(p, Vector3.down * cellSize, Color.green);
+            Debug.DrawRay(p, Vector3.left * cellSize, Color.green);
+            Debug.DrawRay(p, Vector3.right * cellSize, Color.green);
+            //Debug.Log("UP:"+freeSidesTab[0] + " DOWN:" + freeSidesTab[1] + " LEFT:" + freeSidesTab[2] + " RIGHT:" + freeSidesTab[3]);
         }
 
-        Rigidbody2D r = player.GetComponent<Rigidbody2D>();
+        if (side == MG_Sides.EulerVectorToSide(transform.eulerAngles)) {;}
+        else if (side == MG_Sides.Side.up)
+        {
+            r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 0)));
+            if (!freeSidesTab[0]) return false;
+        }
+        else if (side == MG_Sides.Side.down)
+        {
+            r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 180)));
+            if (!freeSidesTab[1]) return false;
+        }
+        else if (side == MG_Sides.Side.left)
+        {
+            r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 90)));
+            if (!freeSidesTab[2]) return false;
+        }
+        else if (side == MG_Sides.Side.right)
+        {
+            r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, -90)));
+            if (!freeSidesTab[3]) return false;
+        }
 
-        if (site == Site.left)
-        {
-            r.MoveRotation(90);
-            if (flagLeft)
-            {
-                r.MovePosition(new Vector2(p.x - 0.32f, p.y));
-                return true;
-            }
-        }
-       else if (site == Site.right)
-        {
-            r.MoveRotation(-90);
-            if (flagRight)
-            {
-                r.MovePosition(new Vector2(p.x + 0.32f, p.y));
-                return true;
-            }
-        }
-       else if (site == Site.up)
-        {
-            r.MoveRotation(0);
-            if (flagUp)
-            {
-                r.MovePosition(new Vector2(p.x, p.y + 0.32f));
-                return true;
-            }
-        }
-        else if (site == Site.down)
-        {
-            r.MoveRotation(180);
-            if (flagDown)
-            {
-                r.MovePosition(new Vector2(p.x, p.y - 0.32f));
-                return true;
-            }
-        }
-        return false;
+        if(freeSidesTab[(int)side]) r.MovePosition(p + MG_Sides.SideToVector3(side) * cellSize);
+        return true;
 
     }
+
+    private void SetFreeSides() // updates freeSidesTab
+    {
+        p = GetComponent<Transform>().position;
+
+        Ray RayUp = new Ray(p, Vector3.up);
+        Ray RayDown = new Ray(p, Vector3.down);
+        Ray RayLeft = new Ray(p, Vector3.left);
+        Ray RayRight = new Ray(p, Vector3.right);
+
+        freeSidesTab[0] = true;
+        freeSidesTab[1] = true;
+        freeSidesTab[2] = true;
+        freeSidesTab[3] = true;
+
+        if (Physics.Raycast(RayUp, cellSize)) freeSidesTab[0] = false;    // up
+        if (Physics.Raycast(RayDown, cellSize)) freeSidesTab[1] = false;  // down
+        if (Physics.Raycast(RayLeft, cellSize)) freeSidesTab[2] = false;  // left
+        if (Physics.Raycast(RayRight, cellSize)) freeSidesTab[3] = false; // right
+    }
+
+    public bool[] GetFreeSides() // returns which sides are free
+    {
+        SetFreeSides();
+        return freeSidesTab;
+    }
+
 }
