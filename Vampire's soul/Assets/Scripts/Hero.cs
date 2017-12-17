@@ -2,6 +2,10 @@
 
 public class Hero : Person {
 
+    //Position of player on grid
+    public IntVector2 posit;
+
+
     private delegate float AttackType(Person p);
     AttackType attack = null;
 
@@ -36,6 +40,7 @@ public class Hero : Person {
 
         if(flagRoundEnd)
         {
+            posit = Position();
             flagRoundEnd = false;
             InitStep();
         }
