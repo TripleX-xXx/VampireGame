@@ -90,12 +90,12 @@ public class Enemy : Person {
         }
         //If there is a obstacle for opt1, go to opt2.
         //If there is a obstacle of opt2, the Move Func will not let him move, so he will stay in the same place;
-        if (GetComponent<Moving>().Move(opt1))
+        if (GetComponent<Moving>().GetFreeSides()[(int)opt1])
         {
             Debug.LogError(opt1);
             return opt1;
         }
-        else if (GetComponent<Moving>().Move(opt2))
+        else if (GetComponent<Moving>().GetFreeSides()[(int)opt2])
         {
             Debug.LogError(opt2);
             return opt2;
