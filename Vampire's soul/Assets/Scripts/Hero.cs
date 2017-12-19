@@ -34,6 +34,7 @@ public class Hero : Person {
             else
             {
                 TakeDmg(attack(this));
+                attack = null;
             }
         }
         else flagRoundEnd = GetComponent<Moving>().Move(side);
