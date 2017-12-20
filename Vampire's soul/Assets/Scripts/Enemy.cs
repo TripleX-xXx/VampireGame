@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Enemy : Person {
 
@@ -9,26 +10,64 @@ public class Enemy : Person {
     //How close it need to be to attack
     public int distanceToAttack = 1;
 
+    public bool chase = false;
 
     //Enemy's turn to do action
     public void OnnStep()
     {
-      //  GetComponent<Moving>().Move(MG_Sides.Side.up); // for debug
-                                                       // place for connecting IA
-                                                       //For each action it have, do a action
-        if (CanSeePlayer())
+        //  GetComponent<Moving>().Move(MG_Sides.Side.up); // for debug
+        // place for connecting IA
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.up, out hit, distanceToSeePlayer))
         {
-            //If close to player
-            if (distanceToAttack == DistanceFromObject(hero))
+            if (hit.collider.gameObject.tag == "Player")
             {
-                //AttackE(hero, 1); 
-                Attack();
+                chase = true;
             }
-            else
-                //if you see but far away
-                GetComponent<Moving>().Move(DirectionToObj(hero)); 
+        }
+        if (Physics.Raycast(transform.position, (transform.up + transform.right).normalized, out hit, distanceToSeePlayer))
+        {
+            if (hit.collider.gameObject.tag == "Player")
+            {
+                chase = true;
+            }
+        }
+        if (Physics.Raycast(transform.position, (transform.up - transform.right).normalized, out hit, distanceToSeePlayer))
+        {
+            if (hit.collider.gameObject.tag == "Player")
+            {
+                chase = true;
+            }
+        }                                //For each action it have, do a action
+                                         //if (CanSeePlayer())
+                                         //{
+                                         //    //If close to player
+                                         //    if (distanceToAttack >= DistanceFromObject(hero))
+                                         //    {
+                                         //        //AttackE(hero, 5); 
+                                         //        Attack();
+                                         //    }
+
+        //if you see but far away
+        //   GetComponent<Moving>().Move(DirectionToObj(hero)); 
+        //   }
+        Debug.LogError(chase);
+        Chase();
+    }
+
+    private void Chase()
+    {
+        if (chase)
+        {
+            if (distanceToAttack >= DistanceFromObject(hero))
+            {
+                //AttackE(hero, 5); 
+                Attack();
+            }else
+            GetComponent<Moving>().Move(DirectionToObj(hero));
         }
     }
+
 
     //Can it see the player?
     public bool CanSeePlayer()
@@ -50,7 +89,7 @@ public class Enemy : Person {
     //Choose side where to go to get closer to enemy
     public MG_Sides.Side DirectionToObj(Hero obj)
     {
-
+        
         if (obj == null)
             return MG_Sides.Side.none;
 
@@ -90,7 +129,7 @@ public class Enemy : Person {
         }
         //If there is a obstacle for opt1, go to opt2.
         //If there is a obstacle of opt2, the Move Func will not let him move, so he will stay in the same place;
-        if (GetComponent<Moving>().GetFreeSides()[(int)opt1])
+        if (GetComponent<Moving>().GetFreeSides()[(int)opt1] )
         {
             Debug.LogError(opt1);
             return opt1;
@@ -121,6 +160,13 @@ public class Enemy : Person {
                 Debug.LogError("Atak");
             }
         }
+    }
+
+    void Update()
+    {
+        Debug.DrawRay(transform.position, transform.up * distanceToSeePlayer, Color.green);
+        Debug.DrawRay(transform.position, (transform.up + transform.right).normalized * distanceToSeePlayer, Color.green);
+        Debug.DrawRay(transform.position, (transform.up - transform.right).normalized * distanceToSeePlayer, Color.green);
     }
 
 }
