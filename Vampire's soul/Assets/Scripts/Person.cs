@@ -40,14 +40,4 @@ public abstract class Person : MonoBehaviour {
 
     }
 
-    //Call the OnStep on all the BaseObj in the game
-    public static void UpdateStep()
-    {
-        MG_Enemy[] objs = GameObject.FindObjectsOfType<MG_Enemy>();
-        //Fist update the enemies, they can move and attack.
-        for (int i = 0; i < objs.Length; i++)
-        {
-            objs[i].OnnStep();
-        }
-    } 
 }

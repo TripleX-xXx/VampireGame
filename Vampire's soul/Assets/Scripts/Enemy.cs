@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Enemy : Person {
 
+    public bool flagDebug = false;
     public Hero hero;
 
     //How far can find the player
@@ -51,7 +52,7 @@ public class Enemy : Person {
         //if you see but far away
         //   GetComponent<Moving>().Move(DirectionToObj(hero)); 
         //   }
-        Debug.LogError(chase);
+        if(flagDebug) Debug.Log(chase);
         Chase();
     }
 
@@ -72,7 +73,7 @@ public class Enemy : Person {
     //Can it see the player?
     public bool CanSeePlayer()
     {
-        Debug.Log(DistanceFromObject(hero));
+        if (flagDebug) Debug.Log(DistanceFromObject(hero));
         return DistanceFromObject(hero) <= distanceToSeePlayer;
     }
 
@@ -131,12 +132,12 @@ public class Enemy : Person {
         //If there is a obstacle of opt2, the Move Func will not let him move, so he will stay in the same place;
         if (GetComponent<Moving>().GetFreeSides()[(int)opt1] )
         {
-            Debug.LogError(opt1);
+            if (flagDebug) Debug.Log(opt1);
             return opt1;
         }
         else if (GetComponent<Moving>().GetFreeSides()[(int)opt2])
         {
-            Debug.LogError(opt2);
+            if (flagDebug) Debug.Log(opt2);
             return opt2;
         }
         else return MG_Sides.Side.none;
@@ -157,16 +158,19 @@ public class Enemy : Person {
             if (hit.collider.tag == "Player")
             {
                 hit.collider.GetComponent<Person>().TakeDmg(30);
-                Debug.LogError("Atak");
+                if (flagDebug) Debug.Log("Atak");
             }
         }
     }
 
     void Update()
     {
-        Debug.DrawRay(transform.position, transform.up * distanceToSeePlayer, Color.green);
-        Debug.DrawRay(transform.position, (transform.up + transform.right).normalized * distanceToSeePlayer, Color.green);
-        Debug.DrawRay(transform.position, (transform.up - transform.right).normalized * distanceToSeePlayer, Color.green);
+        if (flagDebug)
+        {
+            Debug.DrawRay(transform.position, transform.up * distanceToSeePlayer, Color.green);
+            Debug.DrawRay(transform.position, (transform.up + transform.right).normalized * distanceToSeePlayer, Color.green);
+            Debug.DrawRay(transform.position, (transform.up - transform.right).normalized * distanceToSeePlayer, Color.green);
+        }
     }
 
 }
