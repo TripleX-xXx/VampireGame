@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Hero : Person {
 
@@ -34,8 +35,7 @@ public class Hero : Person {
             else
             {
                 TakeDmg(attack(this));
-                attack = null;
-                selectetAbilitie = 0;
+                SetAbilitie(selectetAbilitie);
             }
         }
         else flagRoundEnd = GetComponent<Moving>().Move(side);
@@ -53,10 +53,42 @@ public class Hero : Person {
 
     private void SetAbilitie(int a) // set the selected skill. If it's the same then set movement mode
     {
-        if (selectetAbilitie == a) { attack = null; selectetAbilitie = 0; }
-        else if (a == 1) { attack = AttacksList.Attack1; selectetAbilitie = a; }
-        else if (a == 2) { attack = AttacksList.Attack2; selectetAbilitie = a; }
-        else if (a == 3) { attack = AttacksList.Attack3; selectetAbilitie = a; }
+        if (selectetAbilitie == a) { attack = null; selectetAbilitie = 0; SetGraphicAbilitie(0); }
+        else if (a == 1) { attack = AttacksList.Attack1; selectetAbilitie = a; SetGraphicAbilitie(a); }
+        else if (a == 2) { attack = AttacksList.Attack2; selectetAbilitie = a; SetGraphicAbilitie(a); }
+        else if (a == 3) { attack = AttacksList.Attack3; selectetAbilitie = a; SetGraphicAbilitie(a); }
+    }
+
+    public Image Bite;
+    public Image Blink;
+    public Image Wave;
+
+    private void SetGraphicAbilitie(int a)
+    {
+        if (a == 0)
+        {
+            Bite.enabled = false;
+            Blink.enabled = false;
+            Wave.enabled = false;
+        }
+        else if (a == 1)
+        {
+            Bite.enabled = true;
+            Blink.enabled = false;
+            Wave.enabled = false;
+        }
+        else if (a == 2)
+        {
+            Bite.enabled = false;
+            Blink.enabled = true;
+            Wave.enabled = false;
+        }
+        else if (a == 3)
+        {
+            Bite.enabled = false;
+            Blink.enabled = false;
+            Wave.enabled = true;
+        }
     }
 
     public void InitStep()
