@@ -43,14 +43,14 @@ public static class AttacksList {
         {
             if (hit.collider.tag == "Enemy")
             {
-                hit.collider.GetComponent<Person>().TakeDmg(30);
+                hit.collider.GetComponent<Person>().TakeDmg(10);
             }
         }
         if (debugFlag) Debug.Log("Attack1");
         return 0;
     }
 
-    public static float Attack2(Person person) // Wawe
+    public static float Attack2(Person person) // Wave
     {
         float dmg = 15;
         Vector3 center = person.transform.position + getSideVector(person)* cellSide * 1.5f;

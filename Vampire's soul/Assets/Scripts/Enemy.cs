@@ -63,8 +63,9 @@ public class Enemy : Person {
             if (distanceToAttack >= DistanceFromObject(hero))
             {
                 //AttackE(hero, 5); 
-                Attack();
-            }else
+                AttacksList.EnemyAttack1(this);
+            }
+            else
             GetComponent<Moving>().Move(DirectionToObj(hero));
         }
     }
