@@ -14255,6 +14255,11 @@ Prefab:
       propertyPath: hero
       value: 
       objectReference: {fileID: 886327761}
+    - target: {fileID: 114379376762912706, guid: 4d79723f41e5dfd409847ef2682b419b,
+        type: 2}
+      propertyPath: chase
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d79723f41e5dfd409847ef2682b419b, type: 2}
   m_IsPrefabParent: 0
