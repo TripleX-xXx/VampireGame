@@ -41,11 +41,9 @@ public class Hero : Person {
 
         if(flagRoundEnd)
         {
-            posit = Position();
             flagRoundEnd = false;
             TakeDmg(1);
             InitStep();
-            canvasMenager.NextTour();
         }
 
     }
@@ -83,8 +81,10 @@ public class Hero : Person {
 
     public void InitStep()
     {
+        posit = Position();
         //Send it to the RoundSystem class to handle
         RoundSystem.UpdateStep();
+        canvasMenager.NextTour();
     }
 
     protected override void Attack()
@@ -95,9 +95,7 @@ public class Hero : Person {
         if (selectetAbilitie == 3) canvasMenager.UseWave();
         SetAbilitie(selectetAbilitie);
 
-        posit = Position();
         InitStep();
-        canvasMenager.NextTour();
 
     }
 

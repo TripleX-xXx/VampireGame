@@ -1,10 +1,13 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : Person {
 
     public bool flagDebug = false;
     public Hero hero;
+    public Image health_bar; // graphic health indicator
+    public GameObject enemyObject;
 
     //How far can find the player
     public int distanceToSeePlayer = 5;
@@ -162,6 +165,20 @@ public class Enemy : Person {
                 if (flagDebug) Debug.Log("Atak");
             }
         }
+    }
+
+    public override void TakeDmg(float dmg)
+    {
+        currHP -= dmg;
+        if (currHP < 0) currHP = 0;
+        if (currHP > maxHP) currHP = maxHP;
+        health_bar.fillAmount = currHP / maxHP;
+        if (currHP == 0) Die();
+    }
+
+    protected override void Die() // things that happen while the object dies
+    {
+        Destroy(enemyObject);
     }
 
     void Update()
