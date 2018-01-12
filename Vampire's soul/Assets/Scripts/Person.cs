@@ -11,7 +11,7 @@ public abstract class Person : MonoBehaviour {
     protected float currHP = 100; // current health
 
     //public abstract bool Action(); //formerly Move()
-    protected abstract void Attack(); // execution of the set attack
+    protected abstract void Attack(MG_Sides.Side side); // execution of the set attack
 
     public virtual void TakeDmg(float dmg) //through this method object receives damage
     {

@@ -12,7 +12,7 @@ public static class AttacksList {
     private static Vector3 getSideVector(Person person)
     {
         return MG_Sides.SideToVector3(
-                        MG_Sides.EulerVectorToSide(person.transform.eulerAngles)
+                        MG_Sides.EulerVectorToSide(person.GetComponent<Rigidbody>().rotation.eulerAngles)
                         );
     }
     

@@ -150,7 +150,7 @@ public class Enemy : Person {
     }
 
 
-    protected override void Attack()
+    protected override void Attack(MG_Sides.Side side)
     {
         RaycastHit hit;
         Vector3 site = MG_Sides.SideToVector3(
