@@ -8,8 +8,11 @@ public class Hero : Person {
     public CanvasManager canvasMenager;
 
     private delegate float AttackType(Person p);
-    AttackType attack = AttacksList.Attack1;
+    private AttackType attack = AttacksList.Attack1;
     private Moving moving;
+    private int ingredient = 0; // the amount of ingredients for the potion
+    private int potion = 0; // the amount of potions
+    private int maxPotions = 1; // maximum number of potions
 
     private void Start()
     {
@@ -30,6 +33,7 @@ public class Hero : Person {
         else if (Input.GetKeyDown(KeyCode.DownArrow)) Attack(MG_Sides.Side.down); // Attack Down
         else if (Input.GetKeyDown(KeyCode.LeftArrow)) Attack(MG_Sides.Side.left); // Attack Left
         else if (Input.GetKeyDown(KeyCode.RightArrow)) Attack(MG_Sides.Side.right); // Attack Right
+        else if (Input.GetKeyDown("p")) DrinkPotion(); // Drink Potion
 
     }
 
@@ -114,6 +118,30 @@ public class Hero : Person {
     {
         Destroy(gameObject);
         //GameOver();
+    }
+
+    public bool AddIngredient()
+    {
+        if(potion < maxPotions)
+        {
+            if (++ingredient >= 3)
+            {
+                ingredient = 0;
+                potion++;
+                // add graphic representation
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private void DrinkPotion()
+    {
+        if(potion > 0)
+        {
+            TakeDmg(-30);
+            potion--;
+        }
     }
 
 }
