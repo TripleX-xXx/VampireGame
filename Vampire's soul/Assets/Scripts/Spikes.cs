@@ -12,7 +12,7 @@ public class Spikes : MonoBehaviour {
         {
             if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "Enemy")
             {
-                hit.collider.GetComponent<Person>().TakeDmg(10);
+                hit.collider.GetComponent<Person>().TakeDmg(20);
             }
         }
     }

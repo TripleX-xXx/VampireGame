@@ -27,7 +27,7 @@ public static class AttacksList {
         {
             if (hit.collider.tag == "Player")
             {
-                hit.collider.GetComponent<Person>().TakeDmg(10);
+                hit.collider.GetComponent<Person>().TakeDmg(5);
             }
         }
         if (debugFlag) Debug.Log("EnemyAttack1");
@@ -43,7 +43,7 @@ public static class AttacksList {
         {
             if (hit.collider.tag == "Enemy")
             {
-                hit.collider.GetComponent<Person>().TakeDmg(10);
+                hit.collider.GetComponent<Person>().TakeDmg(40);
             }
         }
         if (debugFlag) Debug.Log("Attack1");
@@ -59,8 +59,8 @@ public static class AttacksList {
         {
             if(hit.tag == "Enemy")
             {
-                hit.GetComponent<Person>().TakeDmg(5);
-                dmg -= 5;
+                hit.GetComponent<Person>().TakeDmg(20);
+                dmg -= 20;
             }
         }
         if (debugFlag) Debug.Log("Attack2 Dmg:"+dmg);

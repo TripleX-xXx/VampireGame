@@ -19,43 +19,10 @@ public class Enemy : Person {
     //Enemy's turn to do action
     public void OnnStep()
     {
-        //  GetComponent<Moving>().Move(MG_Sides.Side.up); // for debug
-        // place for connecting IA
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.up, out hit, distanceToSeePlayer))
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                chase = true;
-            }
-        }
-        if (Physics.Raycast(transform.position, (transform.up + transform.right).normalized, out hit, distanceToSeePlayer))
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                chase = true;
-            }
-        }
-        if (Physics.Raycast(transform.position, (transform.up - transform.right).normalized, out hit, distanceToSeePlayer))
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                chase = true;
-            }
-        }                                //For each action it have, do a action
-                                         //if (CanSeePlayer())
-                                         //{
-                                         //    //If close to player
-                                         //    if (distanceToAttack >= DistanceFromObject(hero))
-                                         //    {
-                                         //        //AttackE(hero, 5); 
-                                         //        Attack();
-                                         //    }
-
-        //if you see but far away
-        //   GetComponent<Moving>().Move(DirectionToObj(hero)); 
-        //   }
+        CheckForPlayer()
+			
         if(flagDebug) Debug.Log(chase);
+		
         Chase();
     }
 
@@ -65,14 +32,35 @@ public class Enemy : Person {
         {
             if (distanceToAttack >= DistanceFromObject(hero))
             {
-                //AttackE(hero, 5); 
+				RotateToPlayer();
                 AttacksList.EnemyAttack1(this);
             }
             else
             GetComponent<Moving>().Move(DirectionToObj(hero));
         }
     }
+	
+	public void CheckForPlayer(){
+		
+		RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.up, out hit, distanceToSeePlayer))
+            if (hit.collider.gameObject.tag == "Player")
+                chase = true;
+        if (Physics.Raycast(transform.position, (transform.up + transform.right).normalized, out hit, distanceToSeePlayer))
+            if (hit.collider.gameObject.tag == "Player")
+                chase = true;
+        if (Physics.Raycast(transform.position, (transform.up - transform.right).normalized, out hit, distanceToSeePlayer))
+            if (hit.collider.gameObject.tag == "Player")
+                chase = true;
+			
+	}
 
+	// Autorotate to player position
+	public void RotateToPlayer()
+    {
+        Quaternion rotation = Quaternion.LookRotation(transform.position - hero.transform.position, transform.TransformDirection(Vector3.forward));
+        transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+    }
 
     //Can it see the player?
     public bool CanSeePlayer()
