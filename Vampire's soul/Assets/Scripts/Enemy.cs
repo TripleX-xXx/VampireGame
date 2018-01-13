@@ -150,7 +150,7 @@ public class Enemy : Person {
     }
 
 
-    protected override void Attack()
+    protected override void Attack(MG_Sides.Side side)
     {
         RaycastHit hit;
         Vector3 site = MG_Sides.SideToVector3(
@@ -178,6 +178,13 @@ public class Enemy : Person {
 
     protected override void Die() // things that happen while the object dies
     {
+        GameObject HP = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        HP.transform.position = new Vector3(transform.position.x,transform.position.y, 0);
+        HP.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        //HP.tag = "HP";
+        HP.GetComponent<BoxCollider>().enabled = false;
+        HP.AddComponent<Ingredient>();
+
         Destroy(enemyObject);
     }
 
