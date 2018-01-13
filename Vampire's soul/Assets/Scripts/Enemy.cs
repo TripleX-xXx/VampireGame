@@ -19,7 +19,7 @@ public class Enemy : Person {
     //Enemy's turn to do action
     public void OnnStep()
     {
-        CheckForPlayer()
+        CheckForPlayer();
 			
         if(flagDebug) Debug.Log(chase);
 		
