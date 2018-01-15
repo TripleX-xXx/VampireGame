@@ -31,35 +31,39 @@ public class Moving : MonoBehaviour {
             //Debug.Log("UP:"+freeSidesTab[0] + " DOWN:" + freeSidesTab[1] + " LEFT:" + freeSidesTab[2] + " RIGHT:" + freeSidesTab[3]);
         }
 
-        if (side == MG_Sides.EulerVectorToSide(transform.eulerAngles)) {;}
-        else if (side == MG_Sides.Side.up)
-        {
-            r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 0)));
-            if (!freeSidesTab[0]) return false;
-            else return true;
-        }
-        else if (side == MG_Sides.Side.down)
-        {
-            r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 180)));
-            if (!freeSidesTab[1]) return false;
-            else return true;
-        }
-        else if (side == MG_Sides.Side.left)
-        {
-            r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 90)));
-            if (!freeSidesTab[2]) return false;
-            else return true;
-        }
-        else if (side == MG_Sides.Side.right)
-        {
-            r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, -90)));
-            if (!freeSidesTab[3]) return false;
-            else return true;
-        }
+        Rotate(side);
 
-        if(freeSidesTab[(int)side]) r.MovePosition(p + MG_Sides.SideToVector3(side) * cellSize);
-        return true;
+        if (freeSidesTab[(int)side])
+        {
+            r.MovePosition(p + MG_Sides.SideToVector3(side) * cellSize);
+            return true;
+        }
+        return false;
 
+    }
+
+    public void Rotate(MG_Sides.Side side) // rotate object to side 'side'
+    {
+        if (side == MG_Sides.Side.none) return;
+        if (side != MG_Sides.EulerVectorToSide(transform.eulerAngles))
+        {
+            if (side == MG_Sides.Side.up)
+            {
+                r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 0)));
+            }
+            else if (side == MG_Sides.Side.down)
+            {
+                r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 180)));
+            }
+            else if (side == MG_Sides.Side.left)
+            {
+                r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 90)));
+            }
+            else if (side == MG_Sides.Side.right)
+            {
+                r.MoveRotation(Quaternion.Euler(new Vector3(0, 0, -90)));
+            }
+        }
     }
 
     private void SetFreeSides() // updates freeSidesTab

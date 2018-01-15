@@ -1,9 +1,13 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : Person {
 
+    public bool flagDebug = false;
     public Hero hero;
+    public Image health_bar; // graphic health indicator
+    public GameObject enemyObject;
 
     //How far can find the player
     public int distanceToSeePlayer = 5;
@@ -15,43 +19,10 @@ public class Enemy : Person {
     //Enemy's turn to do action
     public void OnnStep()
     {
-        //  GetComponent<Moving>().Move(MG_Sides.Side.up); // for debug
-        // place for connecting IA
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.up, out hit, distanceToSeePlayer))
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                chase = true;
-            }
-        }
-        if (Physics.Raycast(transform.position, (transform.up + transform.right).normalized, out hit, distanceToSeePlayer))
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                chase = true;
-            }
-        }
-        if (Physics.Raycast(transform.position, (transform.up - transform.right).normalized, out hit, distanceToSeePlayer))
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                chase = true;
-            }
-        }                                //For each action it have, do a action
-                                         //if (CanSeePlayer())
-                                         //{
-                                         //    //If close to player
-                                         //    if (distanceToAttack >= DistanceFromObject(hero))
-                                         //    {
-                                         //        //AttackE(hero, 5); 
-                                         //        Attack();
-                                         //    }
-
-        //if you see but far away
-        //   GetComponent<Moving>().Move(DirectionToObj(hero)); 
-        //   }
-        Debug.LogError(chase);
+        CheckForPlayer();
+			
+        if(flagDebug) Debug.Log(chase);
+		
         Chase();
     }
 
@@ -61,18 +32,40 @@ public class Enemy : Person {
         {
             if (distanceToAttack >= DistanceFromObject(hero))
             {
-                //AttackE(hero, 5); 
-                Attack();
-            }else
+				RotateToPlayer();
+                AttacksList.EnemyAttack1(this);
+            }
+            else
             GetComponent<Moving>().Move(DirectionToObj(hero));
         }
     }
+	
+	public void CheckForPlayer(){
+		
+		RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.up, out hit, distanceToSeePlayer))
+            if (hit.collider.gameObject.tag == "Player")
+                chase = true;
+        if (Physics.Raycast(transform.position, (transform.up + transform.right).normalized, out hit, distanceToSeePlayer))
+            if (hit.collider.gameObject.tag == "Player")
+                chase = true;
+        if (Physics.Raycast(transform.position, (transform.up - transform.right).normalized, out hit, distanceToSeePlayer))
+            if (hit.collider.gameObject.tag == "Player")
+                chase = true;
+			
+	}
 
+	// Autorotate to player position
+	public void RotateToPlayer()
+    {
+        Quaternion rotation = Quaternion.LookRotation(transform.position - hero.transform.position, transform.TransformDirection(Vector3.forward));
+        transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+    }
 
     //Can it see the player?
     public bool CanSeePlayer()
     {
-        Debug.Log(DistanceFromObject(hero));
+        if (flagDebug) Debug.Log(DistanceFromObject(hero));
         return DistanceFromObject(hero) <= distanceToSeePlayer;
     }
 
@@ -131,12 +124,12 @@ public class Enemy : Person {
         //If there is a obstacle of opt2, the Move Func will not let him move, so he will stay in the same place;
         if (GetComponent<Moving>().GetFreeSides()[(int)opt1] )
         {
-            Debug.LogError(opt1);
+            if (flagDebug) Debug.Log(opt1);
             return opt1;
         }
         else if (GetComponent<Moving>().GetFreeSides()[(int)opt2])
         {
-            Debug.LogError(opt2);
+            if (flagDebug) Debug.Log(opt2);
             return opt2;
         }
         else return MG_Sides.Side.none;
@@ -145,7 +138,7 @@ public class Enemy : Person {
     }
 
 
-    protected override void Attack()
+    protected override void Attack(MG_Sides.Side side)
     {
         RaycastHit hit;
         Vector3 site = MG_Sides.SideToVector3(
@@ -157,16 +150,40 @@ public class Enemy : Person {
             if (hit.collider.tag == "Player")
             {
                 hit.collider.GetComponent<Person>().TakeDmg(30);
-                Debug.LogError("Atak");
+                if (flagDebug) Debug.Log("Atak");
             }
         }
     }
 
+    public override void TakeDmg(float dmg)
+    {
+        currHP -= dmg;
+        if (currHP < 0) currHP = 0;
+        if (currHP > maxHP) currHP = maxHP;
+        health_bar.fillAmount = currHP / maxHP;
+        if (currHP == 0) Die();
+    }
+
+    protected override void Die() // things that happen while the object dies
+    {
+        GameObject HP = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        HP.transform.position = new Vector3(transform.position.x,transform.position.y, 0);
+        HP.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        //HP.tag = "HP";
+        HP.GetComponent<BoxCollider>().enabled = false;
+        HP.AddComponent<Ingredient>();
+
+        Destroy(enemyObject);
+    }
+
     void Update()
     {
-        Debug.DrawRay(transform.position, transform.up * distanceToSeePlayer, Color.green);
-        Debug.DrawRay(transform.position, (transform.up + transform.right).normalized * distanceToSeePlayer, Color.green);
-        Debug.DrawRay(transform.position, (transform.up - transform.right).normalized * distanceToSeePlayer, Color.green);
+        if (flagDebug)
+        {
+            Debug.DrawRay(transform.position, transform.up * distanceToSeePlayer, Color.green);
+            Debug.DrawRay(transform.position, (transform.up + transform.right).normalized * distanceToSeePlayer, Color.green);
+            Debug.DrawRay(transform.position, (transform.up - transform.right).normalized * distanceToSeePlayer, Color.green);
+        }
     }
 
 }
