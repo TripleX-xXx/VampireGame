@@ -8,7 +8,6 @@ public static class AttacksList {
     public static float cellSide = 1f;
 
     // list of private method
-
     private static Vector3 getSideVector(Person person)
     {
         return MG_Sides.SideToVector3(
@@ -17,13 +16,12 @@ public static class AttacksList {
     }
     
     // list of Attacks/Abilities
-
     public static float EnemyAttack1(Person person)
     {
         RaycastHit hit;
         Vector3 site = getSideVector(person);
 
-        if (Physics.Raycast(person.transform.position, site, out hit, cellSide))
+        if (Physics.Raycast(person.transform.position, site, out hit, 3))
         {
             if (hit.collider.tag == "Player")
             {
@@ -33,6 +31,7 @@ public static class AttacksList {
         if (debugFlag) Debug.Log("EnemyAttack1");
         return 0;
     }
+
 
     public static float Attack1(Person person) // simple attack
     {
@@ -90,5 +89,4 @@ public static class AttacksList {
         if (debugFlag) Debug.Log("Attack3");
         return 5;
     }
-
 }

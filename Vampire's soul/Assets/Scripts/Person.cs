@@ -36,7 +36,7 @@ public abstract class Person : MonoBehaviour {
     //Actions that the object will do on his in game turn (usually after the player move or attack)
     public virtual void OnStep()
     {
-
+        RoundSystem.UpdateStep();
     }
 
 }
