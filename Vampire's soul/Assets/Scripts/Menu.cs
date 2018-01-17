@@ -11,6 +11,7 @@ public class Menu : MonoBehaviour
 
     void Start()
     {
+
         manuUI = (Canvas)GetComponent<Canvas>();
         Cursor.visible = manuUI.enabled;
         Cursor.lockState = CursorLockMode.Confined;
