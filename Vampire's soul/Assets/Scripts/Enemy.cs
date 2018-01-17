@@ -8,6 +8,7 @@ public class Enemy : Person {
     public Hero hero;
     public Image health_bar; // graphic health indicator
     public GameObject enemyObject;
+    public Transform drop;
 
     //How far can find the player
     public int distanceToSeePlayer = 5;
@@ -166,13 +167,7 @@ public class Enemy : Person {
 
     protected override void Die() // things that happen while the object dies
     {
-        GameObject HP = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        HP.transform.position = new Vector3(transform.position.x,transform.position.y, 0);
-        HP.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        //HP.tag = "HP";
-        HP.GetComponent<BoxCollider>().enabled = false;
-        HP.AddComponent<Ingredient>();
-
+        Instantiate(drop, transform.position, Quaternion.identity);
         Destroy(enemyObject);
     }
 

@@ -1515,6 +1515,7 @@ MonoBehaviour:
   hero: {fileID: 0}
   health_bar: {fileID: 114655768564763960}
   enemyObject: {fileID: 1590357267555062}
+  drop: {fileID: 4481620768097032, guid: 0328c0e30f5e9ee4d98573c9f618c4f3, type: 2}
   distanceToSeePlayer: 5
   distanceToAttack: 1
   chase: 0
