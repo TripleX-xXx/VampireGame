@@ -9,6 +9,7 @@ public abstract class Person : MonoBehaviour {
 
     protected float maxHP = 100; // the highest available level of health
     protected float currHP = 100; // current health
+    protected int stun = 0; // how long person can't move
 
     //public abstract bool Action(); //formerly Move()
     protected abstract void Attack(MG_Sides.Side side); // execution of the set attack
@@ -39,4 +40,9 @@ public abstract class Person : MonoBehaviour {
 
     }
 
+    public virtual void Stune(int time, bool forced) //Stun service time-how long person will be stune forced if true add time to existed stun
+    {
+        if (forced) stun += time;
+        else if (stun <= 0) stun = time;
+    }
 }
