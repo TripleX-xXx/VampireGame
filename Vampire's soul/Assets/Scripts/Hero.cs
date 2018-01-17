@@ -6,6 +6,7 @@ public class Hero : Person {
     //Position of player on grid
     public IntVector2 posit;
     public CanvasManager canvasMenager;
+    public Animator animator;
 
     private delegate float AttackType(Person p);
     private AttackType attack = AttacksList.Attack1;
@@ -95,6 +96,7 @@ public class Hero : Person {
     protected override void Attack(MG_Sides.Side side)
     {
         moving.Rotate(side);
+        animator.SetTrigger("Attack2");
         TakeDmg(attack(this));
         if (selectetAbilitie == 1) canvasMenager.UseBite();
         if (selectetAbilitie == 2) canvasMenager.UseBlink();
@@ -107,6 +109,7 @@ public class Hero : Person {
 
     public override void TakeDmg(float dmg)
     {
+        if (dmg > 1) animator.SetTrigger("GetHit");
         currHP -= dmg;
         if (currHP < 0) currHP = 0;
         if (currHP > maxHP) currHP = maxHP;
