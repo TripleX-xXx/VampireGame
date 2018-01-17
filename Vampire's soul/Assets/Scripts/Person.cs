@@ -30,13 +30,8 @@ public abstract class Person : MonoBehaviour {
     public IntVector2 Position()
     {
         //Position on the game grid will be the Unity position, but rounded to the nearest Int
-        return new IntVector2(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
+        return new IntVector2(Mathf.RoundToInt(this.GetComponent<Rigidbody>().position.x), Mathf.RoundToInt(this.GetComponent<Rigidbody>().position.y));
     }
 
-    //Actions that the object will do on his in game turn (usually after the player move or attack)
-    public virtual void OnStep()
-    {
-        RoundSystem.UpdateStep();
-    }
 
 }
