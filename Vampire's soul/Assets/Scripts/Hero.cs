@@ -42,6 +42,7 @@ public class Hero : Person {
 
     private void Action(MG_Sides.Side side) // Key (wsadk) event control
     {
+
         if (side == MG_Sides.Side.none) flagRoundEnd = true;
         else flagRoundEnd = moving.Move(side);
 

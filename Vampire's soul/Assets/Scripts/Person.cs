@@ -37,7 +37,7 @@ public abstract class Person : MonoBehaviour {
     //Actions that the object will do on his in game turn (usually after the player move or attack)
     public virtual void OnStep()
     {
-
+        RoundSystem.UpdateStep();
     }
 
     public virtual void Stune(int time, bool forced) //Stun service time-how long person will be stune forced if true add time to existed stun
