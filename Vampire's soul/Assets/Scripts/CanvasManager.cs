@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CanvasManager : MonoBehaviour {
 
     public Image playerHealthBar;
+
     public Image biteIcon;
     public Image blinkIcon;
     public Image waveIcon;
@@ -13,6 +14,9 @@ public class CanvasManager : MonoBehaviour {
     public Image biteCoolDownIcon;
     public Image blinkCoolDownIcon;
     public Image waveCoolDownIcon;
+
+    public Image potion;
+    public Image potionFrame;
 
     private int biteCoolDown = 1;
     private int blinkCoolDown = 6;
@@ -79,6 +83,18 @@ public class CanvasManager : MonoBehaviour {
         waveCoolDownIcon.fillAmount = 0;
     }
 
+    public void UsePotion()
+    {
+        potion.fillAmount = 0;
+        potionFrame.enabled = false;
+    }
+
+    public void AddIngredient()
+    {
+        potion.fillAmount += 1f / 3;
+        if (potion.fillAmount == 1) potionFrame.enabled = true;
+    }
+
     public void NextTour()
     {
         if (biteCoolDownCurrent > 0)
@@ -103,6 +119,8 @@ public class CanvasManager : MonoBehaviour {
         biteIcon.enabled = true;
         blinkIcon.enabled = false;
         waveIcon.enabled = false;
+        potionFrame.enabled = false;
+        potion.fillAmount = 0;
     }
 
 }

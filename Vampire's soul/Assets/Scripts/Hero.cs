@@ -138,6 +138,7 @@ public class Hero : Person {
                 potion++;
                 // add graphic representation
             }
+            canvasMenager.AddIngredient();
             return true;
         }
         return false;
@@ -148,6 +149,7 @@ public class Hero : Person {
         if(potion > 0)
         {
             TakeDmg(-30);
+            canvasMenager.UsePotion();
             potion--;
         }
     }
