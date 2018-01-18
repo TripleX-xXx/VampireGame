@@ -10,7 +10,8 @@ public class Ingredient : MonoBehaviour {
     void Update()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position - Vector3.forward * (cellSize / 2), transform.forward, out hit, cellSize))
+        if(Physics.BoxCast(transform.position+Vector3.forward*(cellSize/2), new Vector3(cellSize / 2, cellSize / 2, 0), -Vector3.forward, out hit, Quaternion.identity, cellSize))
+        //if (Physics.Raycast(transform.position - Vector3.forward * (cellSize / 2), transform.forward, out hit, cellSize))
         {
             if (hit.collider.gameObject.tag == "Player")
             {
