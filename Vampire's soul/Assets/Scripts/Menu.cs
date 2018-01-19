@@ -43,4 +43,14 @@ public class Menu : MonoBehaviour
         Cursor.visible = manuUI.enabled;
     }
 
+    public void SettingButton()
+    {
+        //To do
+    }
+
+    public void AboutButton()
+    {
+        //To do
+    }
+
 }

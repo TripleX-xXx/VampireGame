@@ -12,7 +12,6 @@ public class Spikes : MonoBehaviour {
         if(Physics.BoxCast(transform.position+Vector3.forward*(cellSize/2), new Vector3(cellSize / 2, cellSize / 2, 0), -Vector3.forward, out hit, Quaternion.identity, cellSize))
         //if (Physics.Raycast(transform.position-Vector3.forward* (cellSize/2), transform.forward, out hit, cellSize))
         {
-            Debug.Log("TU: "+ hit.collider.gameObject.tag);
             if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "Enemy")
             {
                 animator.SetTrigger("Attack");
