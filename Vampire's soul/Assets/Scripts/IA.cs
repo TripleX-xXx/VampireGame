@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IA {
+public class IA : MonoBehaviour
+{
 
     public int distanceToSeePlayer = 5;
     public int distanceToAttack = 1;
@@ -122,17 +123,25 @@ public class IA {
             if(enemyPos.x == lastPlayerPosition.x || enemyPos.y == lastPlayerPosition.y)
             {
                 //attack || (rotate && attack)
+                RotateToPlayer();
+                AttacksList.EnemyAttack1(enemy);
             }
             else
             {
-                // go in side 'side'
+                enemy.GetComponent<Moving>().Move(side);
             }
         }
         else if (side != MG_Sides.Side.none)
         {
-            // go in side 'side'
+            enemy.GetComponent<Moving>().Move(side);
         }
 
+    }
+
+    public void RotateToPlayer()
+    {
+        Quaternion rotation = Quaternion.LookRotation(enemy.transform.position - lastPlayerPosition, enemy.transform.TransformDirection(Vector3.forward));
+        enemy.transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
     }
 
 }

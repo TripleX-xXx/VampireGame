@@ -8,6 +8,7 @@ public class Enemy : Person {
     public Hero hero;
     public Image health_bar; // graphic health indicator
     public GameObject enemyObject;
+    public Transform drop;
 
     //How far can find the player
     public int distanceToSeePlayer = 5;
@@ -16,13 +17,16 @@ public class Enemy : Person {
 
     public bool chase = false;
 
+
+
     //Enemy's turn to do action
     public void OnnStep()
     {
+
         CheckForPlayer();
-			
-        if(flagDebug) Debug.Log(chase);
-		
+
+        if (flagDebug) Debug.Log(chase);
+
         Chase();
     }
 
@@ -32,7 +36,7 @@ public class Enemy : Person {
         {
             if (distanceToAttack >= DistanceFromObject(hero))
             {
-				RotateToPlayer();
+                RotateToPlayer();
                 AttacksList.EnemyAttack1(this);
             }
             else
@@ -58,15 +62,14 @@ public class Enemy : Person {
 	// Autorotate to player position
 	public void RotateToPlayer()
     {
-        Quaternion rotation = Quaternion.LookRotation(transform.position - hero.transform.position, transform.TransformDirection(Vector3.forward));
-        transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
-    }
+        Vector3 dir = transform.position - hero.transform.position;
+        float angle = Mathf.Round(Vector3.Angle(dir, transform.up));
 
-    //Can it see the player?
-    public bool CanSeePlayer()
-    {
-        if (flagDebug) Debug.Log(DistanceFromObject(hero));
-        return DistanceFromObject(hero) <= distanceToSeePlayer;
+        if (angle == 90f)
+        {
+            Quaternion rotation = Quaternion.LookRotation(transform.position - hero.transform.position, transform.TransformDirection(Vector3.forward));
+            transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+        }
     }
 
     //Calculate position on grid between 2 objectss
@@ -166,24 +169,9 @@ public class Enemy : Person {
 
     protected override void Die() // things that happen while the object dies
     {
-        GameObject HP = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        HP.transform.position = new Vector3(transform.position.x,transform.position.y, 0);
-        HP.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        //HP.tag = "HP";
-        HP.GetComponent<BoxCollider>().enabled = false;
-        HP.AddComponent<Ingredient>();
-
+        Instantiate(drop, transform.position, Quaternion.identity);
         Destroy(enemyObject);
     }
 
-    void Update()
-    {
-        if (flagDebug)
-        {
-            Debug.DrawRay(transform.position, transform.up * distanceToSeePlayer, Color.green);
-            Debug.DrawRay(transform.position, (transform.up + transform.right).normalized * distanceToSeePlayer, Color.green);
-            Debug.DrawRay(transform.position, (transform.up - transform.right).normalized * distanceToSeePlayer, Color.green);
-        }
-    }
-
+   
 }

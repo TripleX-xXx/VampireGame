@@ -6,6 +6,7 @@ public class Hero : Person {
     //Position of player on grid
     public IntVector2 posit;
     public CanvasManager canvasMenager;
+    public Animator animator;
 
     private delegate float AttackType(Person p);
     private AttackType attack = AttacksList.Attack1;
@@ -21,11 +22,14 @@ public class Hero : Person {
 
     private void Update()
     {
-        if (Input.GetKeyDown("w")) Action(MG_Sides.Side.up); // go Up
-        else if (Input.GetKeyDown("s")) Action(MG_Sides.Side.down); // go Down
-        else if (Input.GetKeyDown("a")) Action(MG_Sides.Side.left); // go Left
-        else if (Input.GetKeyDown("d")) Action(MG_Sides.Side.right); // go Right
-        else if (Input.GetKeyDown("k")) Action(MG_Sides.Side.none); // skip round
+        if (stun == 0)
+        {
+            if (Input.GetKeyDown("w")) Action(MG_Sides.Side.up); // go Up
+            else if (Input.GetKeyDown("s")) Action(MG_Sides.Side.down); // go Down
+            else if (Input.GetKeyDown("a")) Action(MG_Sides.Side.left); // go Left
+            else if (Input.GetKeyDown("d")) Action(MG_Sides.Side.right); // go Right
+        }
+        if (Input.GetKeyDown("k")) Action(MG_Sides.Side.none); // skip round
         else if (Input.GetKeyDown("1") || Input.GetKeyDown(KeyCode.Keypad1)) SetAbilitie(3); // choose skill 1
         else if (Input.GetKeyDown("2") || Input.GetKeyDown(KeyCode.Keypad2)) SetAbilitie(2); // choose skill 2
         else if (Input.GetKeyDown("3") || Input.GetKeyDown(KeyCode.Keypad3)) SetAbilitie(1); // choose skill 3
@@ -33,7 +37,7 @@ public class Hero : Person {
         else if (Input.GetKeyDown(KeyCode.DownArrow)) Attack(MG_Sides.Side.down); // Attack Down
         else if (Input.GetKeyDown(KeyCode.LeftArrow)) Attack(MG_Sides.Side.left); // Attack Left
         else if (Input.GetKeyDown(KeyCode.RightArrow)) Attack(MG_Sides.Side.right); // Attack Right
-        else if (Input.GetKeyDown("p")) DrinkPotion(); // Drink Potion
+        else if (Input.GetKeyDown(KeyCode.Keypad0)) DrinkPotion(); // Drink Potion
 
     }
 
@@ -41,6 +45,7 @@ public class Hero : Person {
 
     private void Action(MG_Sides.Side side) // Key (wsadk) event control
     {
+
         if (side == MG_Sides.Side.none) flagRoundEnd = true;
         else flagRoundEnd = moving.Move(side);
 
@@ -90,11 +95,13 @@ public class Hero : Person {
         //Send it to the RoundSystem class to handle
         RoundSystem.UpdateStep();
         canvasMenager.NextTour();
+        if (stun > 0) stun--;
     }
 
     protected override void Attack(MG_Sides.Side side)
     {
         moving.Rotate(side);
+        animator.SetTrigger("Attack2");
         TakeDmg(attack(this));
         if (selectetAbilitie == 1) canvasMenager.UseBite();
         if (selectetAbilitie == 2) canvasMenager.UseBlink();
@@ -107,6 +114,7 @@ public class Hero : Person {
 
     public override void TakeDmg(float dmg)
     {
+        if (dmg > 1) animator.SetTrigger("GetHit");
         currHP -= dmg;
         if (currHP < 0) currHP = 0;
         if (currHP > maxHP) currHP = maxHP;
@@ -130,6 +138,7 @@ public class Hero : Person {
                 potion++;
                 // add graphic representation
             }
+            canvasMenager.AddIngredient();
             return true;
         }
         return false;
@@ -140,6 +149,7 @@ public class Hero : Person {
         if(potion > 0)
         {
             TakeDmg(-30);
+            canvasMenager.UsePotion();
             potion--;
         }
     }

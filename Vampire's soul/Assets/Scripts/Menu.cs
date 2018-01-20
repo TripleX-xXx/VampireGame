@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEditor.UI;
+
 
 public class Menu : MonoBehaviour
 {
@@ -11,6 +11,7 @@ public class Menu : MonoBehaviour
 
     void Start()
     {
+
         manuUI = (Canvas)GetComponent<Canvas>();
         Cursor.visible = manuUI.enabled;
         Cursor.lockState = CursorLockMode.Confined;

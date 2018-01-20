@@ -9,6 +9,7 @@ public abstract class Person : MonoBehaviour {
 
     protected float maxHP = 100; // the highest available level of health
     protected float currHP = 100; // current health
+    protected int stun = 0; // how long person can't move
 
     //public abstract bool Action(); //formerly Move()
     protected abstract void Attack(MG_Sides.Side side); // execution of the set attack
@@ -30,13 +31,18 @@ public abstract class Person : MonoBehaviour {
     public IntVector2 Position()
     {
         //Position on the game grid will be the Unity position, but rounded to the nearest Int
-        return new IntVector2(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
+        return new IntVector2(Mathf.RoundToInt(this.GetComponent<Rigidbody>().position.x), Mathf.RoundToInt(this.GetComponent<Rigidbody>().position.y));
     }
 
     //Actions that the object will do on his in game turn (usually after the player move or attack)
     public virtual void OnStep()
     {
-
+        RoundSystem.UpdateStep();
     }
 
+    public virtual void Stune(int time, bool forced) //Stun service time-how long person will be stune forced if true add time to existed stun
+    {
+        if (forced) stun += time;
+        else if (stun <= 0) stun = time;
+    }
 }

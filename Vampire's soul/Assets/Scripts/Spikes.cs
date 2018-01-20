@@ -4,6 +4,7 @@ public class Spikes : MonoBehaviour {
 
     public bool flagDebug = false;
     public float cellSize = 1;
+    public Animator animator;
 
     public void OnnStep()
     {
@@ -12,6 +13,7 @@ public class Spikes : MonoBehaviour {
         {
             if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "Enemy")
             {
+                animator.SetTrigger("Attack");
                 hit.collider.GetComponent<Person>().TakeDmg(20);
             }
         }
