@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Menu2 : MonoBehaviour {
 
@@ -16,5 +17,20 @@ public class Menu2 : MonoBehaviour {
         {
             o.active = !o.active;
         }
+    }
+
+    public void ContinueButton()
+    {
+        o.active = !o.active;
+    }
+
+    public void SettingsButton()
+    {
+        //To do
+    }
+
+    public void ExitButton()
+    {
+        SceneManager.LoadScene(0);
     }
 }
