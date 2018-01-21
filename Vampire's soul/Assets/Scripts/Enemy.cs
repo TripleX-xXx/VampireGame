@@ -22,13 +22,14 @@ public class Enemy : Person {
     //Enemy's turn to do action
     public void OnnStep()
     {
-
+       
         CheckForPlayer();
-
-        if (flagDebug) Debug.Log(chase);
-
+        if (stun > 0) stun--;   
         Chase();
+        
     }
+
+
 
     private void Chase()
     {
@@ -40,7 +41,10 @@ public class Enemy : Person {
                 AttacksList.EnemyAttack1(this);
             }
             else
-            GetComponent<Moving>().Move(DirectionToObj(hero));
+            {
+                if (stun == 0)
+                GetComponent<Moving>().Move(DirectionToObj(hero));
+            }
         }
     }
 	
