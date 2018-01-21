@@ -21,7 +21,7 @@ public static class AttacksList {
         RaycastHit hit;
         Vector3 site = getSideVector(person);
 
-        if (Physics.Raycast(person.transform.position, site, out hit, 3))
+        if (Physics.Raycast(person.transform.position, site, out hit, cellSide*3))
         {
             if (hit.collider.tag == "Player")
             {
