@@ -67,6 +67,7 @@ public class Hero : Person {
             selectetAbilitie = a;
             attack = AttacksList.Attack1;
             canvasMenager.SelectBite();
+            canvasMenager.SetHealthBarGold(currHP / maxHP);
             
         }
         else if (a == 2)
@@ -75,6 +76,7 @@ public class Hero : Person {
             {
                 selectetAbilitie = a;
                 attack = AttacksList.Attack3;
+                canvasMenager.SetHealthBarGold((currHP-5) / maxHP);
             }
             else SetAbilitie(1);
         }
@@ -84,6 +86,7 @@ public class Hero : Person {
             {
                 selectetAbilitie = a;
                 attack = AttacksList.Attack2;
+                canvasMenager.SetHealthBarGold((currHP - 15) / maxHP);
             }
             else SetAbilitie(1);
         }

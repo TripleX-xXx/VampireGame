@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CanvasManager : MonoBehaviour {
 
     public Image playerHealthBar;
+    public Image playerHealthBarGold;
 
     public Image biteIcon;
     public Image blinkIcon;
@@ -27,6 +28,12 @@ public class CanvasManager : MonoBehaviour {
     private int waveCoolDownCurrent = 0;
 
     public void SetHealthBar(float a)
+    {
+        playerHealthBar.fillAmount = a;
+        playerHealthBarGold.fillAmount = a;
+    }
+
+    public void SetHealthBarGold(float a)
     {
         playerHealthBar.fillAmount = a;
     }

@@ -222,8 +222,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maps:
-  - {fileID: 2800000, guid: 37eface0b95e84846ae250a1095fe657, type: 3}
   - {fileID: 2800000, guid: fa76ddb224afce248b4a6f49d3b2866b, type: 3}
+  - {fileID: 2800000, guid: 37eface0b95e84846ae250a1095fe657, type: 3}
   colorMappings:
   - color: {r: 0, g: 0, b: 0, a: 1}
     prefab: {fileID: 1419781848454174, guid: dbdd4ec2585a57142a2b46b416252d75, type: 2}

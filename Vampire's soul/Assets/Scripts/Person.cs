@@ -8,7 +8,7 @@ public abstract class Person : MonoBehaviour {
     //(to implement in future)// protected Image lossOfHealth_bar; //graphic loss of health indicator
 
     protected float maxHP = 100; // the highest available level of health
-    protected float currHP = 100; // current health
+    /*protected*/ public float currHP = 100; // current health
     protected int stun = 0; // how long person can't move
 
     //public abstract bool Action(); //formerly Move()
