@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
     //Who will be spawned
-    public Transform enemyObj;
+    public Enemy enemyObj;
     //How much turns it sleeps
     private int sleeptime = 5;
 
@@ -14,7 +14,9 @@ public class Spawner : MonoBehaviour {
         else
         {
             sleeptime = 5;
-            Instantiate(enemyObj, new Vector3(this.transform.position.x, this.transform.position.y - 1, this.transform.position.z), enemyObj.rotation);
+            enemyObj.hero = Object.FindObjectOfType<Hero>();
+            enemyObj.tag = "Enemy";
+            Instantiate(enemyObj, new Vector3(this.transform.position.x, this.transform.position.y - 1, this.transform.position.z), enemyObj.transform.rotation);
         }
     }
 

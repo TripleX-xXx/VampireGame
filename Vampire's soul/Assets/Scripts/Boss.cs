@@ -62,8 +62,8 @@ public class Boss : Person
     public int DistanceFromObject(Person obj)
     {
 
-        IntVector2 position = Position();
-        IntVector2 playerPos = obj.Position();
+        Vector3 position = GetComponent<Rigidbody>().position;
+        Vector3 playerPos = obj.GetComponent<Rigidbody>().position;
 
         return Mathf.CeilToInt(Vector3.Distance(new Vector3(position.x, position.z), new Vector2(playerPos.x, playerPos.z)));
     }
