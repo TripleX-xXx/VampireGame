@@ -18,6 +18,13 @@ public class Boss : Person
 
     private int count = 0;
 
+    private void Start()
+    {
+        maxHP = 250;
+        currHP = 250;
+
+    }
+
     //Enemy's turn to do action
     public void OnnStep()
     {
