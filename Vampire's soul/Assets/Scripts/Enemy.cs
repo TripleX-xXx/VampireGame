@@ -10,6 +10,7 @@ public class Enemy : Person
     public Image health_bar; // graphic health indicator
     public GameObject enemyObject;
     public Transform drop;
+    public Animator anim;
 
     //How far can find the player
     public int distanceToSeePlayer = 5;
@@ -41,6 +42,7 @@ public class Enemy : Person
             if (distanceToAttack >= DistanceFromObject(hero))
             {
                 RotateToPlayer();
+                anim.SetTrigger("Attack1");
                 AttacksList.EnemyAttack1(this);
             }
             else
