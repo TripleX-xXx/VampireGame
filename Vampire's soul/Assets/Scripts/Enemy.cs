@@ -18,7 +18,7 @@ public class Enemy : Person
 
     public bool chase = false;
 
-    private void Start()
+    private void Awake()
     {
         this.tag = "Enemy";
         hero = UnityEngine.Object.FindObjectOfType<Hero>();

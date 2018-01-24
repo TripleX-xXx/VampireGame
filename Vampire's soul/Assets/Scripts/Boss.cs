@@ -23,6 +23,9 @@ public class Boss : Person
         maxHP = 250;
         currHP = 250;
 
+        this.tag = "Enemy";
+        hero = UnityEngine.Object.FindObjectOfType<Hero>();
+
     }
 
     //Enemy's turn to do action
@@ -42,7 +45,6 @@ public class Boss : Person
             if (count < 3 && distanceToSeePlayer >= DistanceFromObject(hero))
             {
                 if (flagDebug) Debug.LogError("SmallBAM");
-                RotateToPlayer();
                 AttackE(hero, 5);
             } else if(count == 3 && distanceToAttack >= DistanceFromObject(hero))
             {
@@ -69,8 +71,8 @@ public class Boss : Person
     public int DistanceFromObject(Person obj)
     {
 
-        Vector3 position = GetComponent<Rigidbody>().position;
-        Vector3 playerPos = obj.GetComponent<Rigidbody>().position;
+        IntVector2 position = Position();
+        IntVector2 playerPos = obj.Position();
 
         return Mathf.CeilToInt(Vector3.Distance(new Vector3(position.x, position.z), new Vector2(playerPos.x, playerPos.z)));
     }
