@@ -7,6 +7,7 @@ public static class RoundSystem {
     public static void UpdateStep()
     {
         Enemy[] objs = Object.FindObjectsOfType<Enemy>();
+        Enemy_archer[] archer = Object.FindObjectsOfType<Enemy_archer>();
         Spikes[] trap = Object.FindObjectsOfType<Spikes>();
         Mud[] mud = Object.FindObjectsOfType<Mud>();
 
@@ -34,6 +35,11 @@ public static class RoundSystem {
         {
             mud[i].OnnStep();
         }
+        for (int i = 0; i < archer.Length; i++)
+        {
+            archer[i].OnnStep();
+        }
+        
 
     }
 
