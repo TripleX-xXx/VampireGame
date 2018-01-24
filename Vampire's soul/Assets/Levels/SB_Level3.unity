@@ -949,6 +949,11 @@ Prefab:
       propertyPath: m_Name
       value: Horizontal 1x5 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 23880889856367710, guid: 560674f48385940baa92511c51c987af,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8a63a38ddb9374417882869c98da58c8, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 560674f48385940baa92511c51c987af, type: 2}
   m_IsPrefabParent: 0
@@ -6016,6 +6021,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23074568109666046, guid: 560674f48385940baa92511c51c987af,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b6cad03b22bf4420ab66ce5151fd032c, type: 2}
+    - target: {fileID: 23486989282878076, guid: 560674f48385940baa92511c51c987af,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 144b6f942b13c46ef9d09246bfa1f4d9, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 560674f48385940baa92511c51c987af, type: 2}
   m_IsPrefabParent: 0
@@ -6306,8 +6321,13 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1507758726}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< HEAD
+  m_LocalPosition: {x: 276.5, y: 208.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+=======
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
+>>>>>>> master
   m_Children:
   - {fileID: 1531618811}
   - {fileID: 702152924}
@@ -6370,7 +6390,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4327904809260000, guid: e95e59b54c478e946b14b2d252ca8899, type: 2}
       propertyPath: m_LocalScale.y
+<<<<<<< HEAD
+      value: 2
+=======
       value: 1.5
+>>>>>>> master
       objectReference: {fileID: 0}
     - target: {fileID: 4327904809260000, guid: e95e59b54c478e946b14b2d252ca8899, type: 2}
       propertyPath: m_LocalScale.z
@@ -8461,7 +8485,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1171a27748e63734bb928bd3d43c617a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+  health_bar: {fileID: 702152925}
+=======
   flagDebug: 0
+>>>>>>> master
   hero: {fileID: 2068315302}
   distanceToSeePlayer: 5
   distanceToAttack: 1
@@ -8885,7 +8913,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0d34a3a623b7948918c6357ab8beeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+  health_bar: {fileID: 1531618812}
+=======
   canvasMenager: {fileID: 0}
+>>>>>>> master
 --- !u!54 &2068315303
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9173,7 +9205,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4413873473481540, guid: a50458e6ffc945041a22d30ca59b494a, type: 2}
       propertyPath: m_LocalScale.y
+<<<<<<< HEAD
+      value: 2.5
+=======
       value: 1.5
+>>>>>>> master
       objectReference: {fileID: 0}
     - target: {fileID: 4413873473481540, guid: a50458e6ffc945041a22d30ca59b494a, type: 2}
       propertyPath: m_LocalScale.z
@@ -9412,13 +9448,22 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2136996128}
+<<<<<<< HEAD
+  m_LocalRotation: {x: -0.3420201, y: 0, z: 0, w: 0.9396927}
+  m_LocalPosition: {x: -0.4, y: -9.33, z: -10}
+=======
   m_LocalRotation: {x: -0.17364825, y: 0, z: 0, w: 0.9848078}
   m_LocalPosition: {x: -0.03, y: -10.7, z: -10}
+>>>>>>> master
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+<<<<<<< HEAD
+  m_LocalEulerAnglesHint: {x: -40, y: 0, z: 0}
+=======
   m_LocalEulerAnglesHint: {x: -20, y: 0, z: 0}
+>>>>>>> master
 --- !u!54 &2136996133
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9429,7 +9474,11 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
+<<<<<<< HEAD
+  m_UseGravity: 0
+=======
   m_UseGravity: 1
+>>>>>>> master
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -9446,4 +9495,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow: {fileID: 2068315301}
+<<<<<<< HEAD
+  camPosition: {x: 0, y: -3, z: 0}
+=======
   camPosition: {x: 0, y: -3.5, z: -10}
+>>>>>>> master
