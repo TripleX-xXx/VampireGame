@@ -42,7 +42,7 @@ public class Enemy : Person
             if (distanceToAttack >= DistanceFromObject(hero))
             {
                 RotateToPlayer();
-                anim.SetTrigger("Attack1");
+                anim.SetTrigger("Attack");
                 AttacksList.EnemyAttack1(this);
             }
             else
