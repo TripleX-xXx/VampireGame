@@ -18710,6 +18710,7 @@ MonoBehaviour:
   waveCoolDownIcon: {fileID: 639639040}
   potion: {fileID: 1255922833}
   potionFrame: {fileID: 1482183678}
+  stune: {fileID: 0}
 --- !u!114 &2026588131
 MonoBehaviour:
   m_ObjectHideFlags: 0
