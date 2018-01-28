@@ -20,7 +20,6 @@ public class random_guitar : MonoBehaviour {
 	void Start () {
 		bpm = 100.0F;
 		beatsPerMeasure = 4;
-		int i = 0;
 		singleMeasureTime = AudioSettings.dspTime + 2.0F;
 		running = true;
 		guitarA = Random.Range (0, 4);

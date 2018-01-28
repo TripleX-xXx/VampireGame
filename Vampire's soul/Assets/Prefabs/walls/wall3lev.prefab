@@ -37,7 +37,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4669207444910800}
-  - component: {fileID: 114948263500818150}
   m_Layer: 0
   m_Name: wall3lev
   m_TagString: Untagged
@@ -125,24 +124,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114948263500818150
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1983514079866598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0cc5f2958be63341a3160142fc60302, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maps:
-  - {fileID: 2800000, guid: b5ce9591cf09049feae9a7524de226c8, type: 3}
-  - {fileID: 2800000, guid: c7f61e21d91a946348d565de8b86a716, type: 3}
-  colorMappings:
-  - color: {r: 0, g: 0, b: 0, a: 1}
-    prefab: {fileID: 1419781848454174, guid: dbdd4ec2585a57142a2b46b416252d75, type: 2}
-  - color: {r: 1, g: 0, b: 0, a: 1}
-    prefab: {fileID: 1910347829184924, guid: 246ac4e4922db455e959607bcdc65360, type: 2}
-  - color: {r: 0, g: 0, b: 1, a: 1}
-    prefab: {fileID: 1590357267555062, guid: 111cb57532b57d04295c9d0870a0e58d, type: 2}
