@@ -18,7 +18,6 @@ public class title : MonoBehaviour {
 	void Start () {
 		bpm = 100.0F;
 		beatsPerMeasure = 4;
-		int i = 0;
 		singleMeasureTime = AudioSettings.dspTime + 2.0F;
 		running = true;
 		

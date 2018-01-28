@@ -10,22 +10,11 @@ public class Menu : MonoBehaviour
     public GameObject settings;
     public GameObject about;
 
-    public GameObject soundOn;
-    public GameObject soundOff;
-    public GameObject musicOn;
-    public GameObject musicOff;
-
-
     void Start()
     {
         menu.SetActive(true);
         settings.SetActive(false);
         about.SetActive(false);
-
-        soundOn.SetActive(true);
-        soundOff.SetActive(false);
-        musicOn.SetActive(true);
-        musicOff.SetActive(false);
     }
 
     void Update()
@@ -70,31 +59,25 @@ public class Menu : MonoBehaviour
     public void SoundOnButton()
     {
         //ToDo
-        soundOff.SetActive(false);
-        soundOn.SetActive(true);
         Debug.Log("SoundOn");
     }
 
     public void SoundOffButton()
     {
         //ToDo
-        soundOn.SetActive(false);
-        soundOff.SetActive(true);
         Debug.Log("SoundOff");
     }
 
     public void MusicOnButton()
     {
         //ToDo
-        musicOff.SetActive(false);
-        musicOn.SetActive(true);
+        Debug.Log("MusicOn");
     }
 
     public void MusicOffButton()
     {
         //ToDo
-        musicOn.SetActive(false);
-        musicOff.SetActive(true);
+        Debug.Log("MusicOff");
     }
 
 }

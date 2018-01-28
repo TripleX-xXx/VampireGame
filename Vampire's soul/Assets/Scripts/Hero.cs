@@ -14,10 +14,12 @@ public class Hero : Person {
     private int ingredient = 0; // the amount of ingredients for the potion
     private int potion = 0; // the amount of potions
     private int maxPotions = 1; // maximum number of potions
+    private MG_AudioManager audioManager;
 
     private void Start()
     {
         moving = GetComponent<Moving>();
+        audioManager = FindObjectOfType<MG_AudioManager>();
     }
 
     private void Update()
@@ -51,6 +53,7 @@ public class Hero : Person {
 
         if (flagRoundEnd)
         {
+            audioManager.Play("Step");
             flagRoundEnd = false;
             TakeDmg(1);
             InitStep();
@@ -104,13 +107,27 @@ public class Hero : Person {
     protected override void Attack(MG_Sides.Side side)
     {
         moving.Rotate(side);
-        animator.SetTrigger("Attack2");
+        if (selectetAbilitie == 1)
+        {
+            canvasMenager.UseBite();
+            animator.SetTrigger("Attack2");
+            audioManager.Play("Bite");
+        }
+        if (selectetAbilitie == 2)
+        {
+            canvasMenager.UseBlink();
+            animator.SetTrigger("Attack2");
+            audioManager.Play("Teleport");
+        }
+        if (selectetAbilitie == 3)
+        {
+            canvasMenager.UseWave();
+            animator.SetTrigger("Attack2");
+            audioManager.Play("Bite");
+        }
         TakeDmg(attack(this));
-        if (selectetAbilitie == 1) canvasMenager.UseBite();
-        if (selectetAbilitie == 2) canvasMenager.UseBlink();
-        if (selectetAbilitie == 3) canvasMenager.UseWave();
-        SetAbilitie(selectetAbilitie);
 
+        SetAbilitie(selectetAbilitie);
         InitStep();
 
     }
@@ -127,14 +144,30 @@ public class Hero : Person {
 
     protected override void Die()
     {
+        audioManager.Play("Lose");
         Destroy(gameObject);
         //GameOver();
+    }
+
+    public override void Stune(int time, bool forced)
+    {
+        if (forced)
+        {
+            stun += time;
+            canvasMenager.StuneAdd(time);
+        }
+        else if (stun <= 0)
+        {
+            stun = time;
+            canvasMenager.StuneReplace(time);
+        }
     }
 
     public bool AddIngredient()
     {
         if(potion < maxPotions)
         {
+            audioManager.Play("Ingredient");
             if (++ingredient >= 3)
             {
                 ingredient = 0;
@@ -151,6 +184,7 @@ public class Hero : Person {
     {
         if(potion > 0)
         {
+            audioManager.Play("DringPotion");
             TakeDmg(-30);
             canvasMenager.UsePotion();
             potion--;

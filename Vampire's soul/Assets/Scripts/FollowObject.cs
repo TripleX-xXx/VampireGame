@@ -19,7 +19,10 @@ public class FollowObject : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        p = follow.transform.position;
-        r.MovePosition(new Vector3(p.x + camPosition.x, p.y + camPosition.y, camPosition.z));
+        if (follow != null)
+        {
+            p = follow.transform.position;
+            r.MovePosition(new Vector3(p.x + camPosition.x, p.y + camPosition.y, camPosition.z));
+        }
     }
 }

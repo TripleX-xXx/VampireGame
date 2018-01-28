@@ -5,8 +5,22 @@ public class MG_AudioManager : MonoBehaviour {
 
     public Sound[] sounds;
 
+    public static MG_AudioManager instance;
+
     void Awake ()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
