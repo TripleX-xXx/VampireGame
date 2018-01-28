@@ -14,6 +14,7 @@ public class Boss : Person
     public int distanceToSeePlayer = 5;
     //How close it need to be to attack
     public int distanceToAttack = 1;
+    private MG_AudioManager audioManager;
 
 
     private int count = 0;
@@ -25,7 +26,7 @@ public class Boss : Person
 
         this.tag = "Enemy";
         hero = UnityEngine.Object.FindObjectOfType<Hero>();
-
+        audioManager = FindObjectOfType<MG_AudioManager>();
     }
 
     //Enemy's turn to do action
@@ -79,6 +80,7 @@ public class Boss : Person
 
     public void AttackE(Hero P, float dmg)
     {
+        audioManager.Play("Spell");
         P.TakeDmg(dmg);
     }
 

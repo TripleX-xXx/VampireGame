@@ -19,10 +19,17 @@ public class Enemy : Person
 
     public bool chase = false;
 
+    private MG_AudioManager audioManager;
+
     private void Awake()
     {
         this.tag = "Enemy";
         hero = UnityEngine.Object.FindObjectOfType<Hero>();
+    }
+
+    private void Start()
+    {
+        audioManager = FindObjectOfType<MG_AudioManager>();
     }
 
     //Enemy's turn to do action
@@ -43,6 +50,7 @@ public class Enemy : Person
             {
                 RotateToPlayer();
                 anim.SetTrigger("Attack");
+                audioManager.Play("Sword");
                 AttacksList.EnemyAttack1(this);
             }
             else
@@ -170,6 +178,7 @@ public class Enemy : Person
 
     public override void TakeDmg(float dmg)
     {
+        anim.SetTrigger("GetDmg");
         currHP -= dmg;
         if (currHP < 0) currHP = 0;
         if (currHP > maxHP) currHP = maxHP;

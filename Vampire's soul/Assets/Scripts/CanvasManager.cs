@@ -19,13 +19,17 @@ public class CanvasManager : MonoBehaviour {
     public Image potion;
     public Image potionFrame;
 
+    public Image stune;
+
     private int biteCoolDown = 1;
     private int blinkCoolDown = 6;
     private int waveCoolDown = 4;
+    private int stuneCoolDown = 0;
 
     private int biteCoolDownCurrent = 0;
     private int blinkCoolDownCurrent = 0;
     private int waveCoolDownCurrent = 0;
+    private int stuneCoolDownCurrent = 0;
 
     public void SetHealthBar(float a)
     {
@@ -102,6 +106,18 @@ public class CanvasManager : MonoBehaviour {
         if (potion.fillAmount == 1) potionFrame.enabled = true;
     }
 
+    public void StuneAdd(int time)
+    {
+        stuneCoolDown += time-1;
+        stuneCoolDownCurrent += time;
+    }
+
+    public void StuneReplace(int time)
+    {
+        stuneCoolDown = time-1;
+        stuneCoolDownCurrent = time;
+    }
+
     public void NextTour()
     {
         if (biteCoolDownCurrent > 0)
@@ -119,6 +135,18 @@ public class CanvasManager : MonoBehaviour {
             waveCoolDownCurrent--;
             waveCoolDownIcon.fillAmount = 1 - (float)waveCoolDownCurrent / waveCoolDown;
         }
+        if (stuneCoolDownCurrent > 0)
+        {
+            Debug.Log(stuneCoolDownCurrent);
+            stuneCoolDownCurrent--;
+            Debug.Log(stuneCoolDownCurrent);
+            stune.fillAmount = (float)stuneCoolDownCurrent / stuneCoolDown;
+        }
+        if (stuneCoolDownCurrent <= 0 && stuneCoolDown != 0)
+        {
+            stuneCoolDownCurrent = 0;
+            stuneCoolDown = 0;
+        }
     }
 
     private void Awake()
@@ -128,6 +156,7 @@ public class CanvasManager : MonoBehaviour {
         waveIcon.enabled = false;
         potionFrame.enabled = false;
         potion.fillAmount = 0;
+        stune.fillAmount = 0;
     }
 
 }

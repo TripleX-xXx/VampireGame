@@ -18,10 +18,17 @@ public class Enemy_archer : Person {
 
     public bool chase = false;
 
+    private MG_AudioManager audioManager;
+
     private void Awake()
     {
         this.tag = "Enemy";
         hero = UnityEngine.Object.FindObjectOfType<Hero>();
+    }
+
+    private void Start()
+    {
+        audioManager = FindObjectOfType<MG_AudioManager>();
     }
 
     //Enemy's turn to do action
@@ -42,7 +49,8 @@ public class Enemy_archer : Person {
             if (distanceToAttack >= DistanceFromObject(hero))
             {
                 RotateToPlayer();
-                anim.SetTrigger("IdleToShootBow");
+                anim.SetTrigger("Attack");
+                audioManager.Play("Bow");
                 AttacksList.EnemyAttack1(this);
             }
             else
@@ -169,6 +177,7 @@ public class Enemy_archer : Person {
 
     public override void TakeDmg(float dmg)
     {
+        anim.SetTrigger("GetDmg");
         currHP -= dmg;
         if (currHP < 0) currHP = 0;
         if (currHP > maxHP) currHP = maxHP;
