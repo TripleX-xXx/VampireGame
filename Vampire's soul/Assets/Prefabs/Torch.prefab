@@ -137,10 +137,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4024480144529872}
   - component: {fileID: 33308243294105022}
-  - component: {fileID: 65251532996686978}
   m_Layer: 0
   m_Name: Torch
-  m_TagString: Untagged
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,7 +151,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1954010336819792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< HEAD
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+=======
   m_LocalPosition: {x: -57.611897, y: -85.05598, z: -0.27}
+>>>>>>> master
   m_LocalScale: {x: 0.9841421, y: 0.9841422, z: 0.9841422}
   m_Children:
   - {fileID: 4296285325572004}
@@ -468,18 +471,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1326508725439160}
   m_Mesh: {fileID: 4300000, guid: 1ab063788e0c54d6fb66435f234c75c5, type: 3}
---- !u!65 &65251532996686978
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1954010336819792}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95001241620636768
 Animator:
   serializedVersion: 3
