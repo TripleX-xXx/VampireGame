@@ -179,7 +179,7 @@ public class Enemy : Person
 
     protected override void Die() // things that happen while the object dies
     {
-        Instantiate(drop, transform.position, Quaternion.identity);
+        Instantiate(drop, new Vector3(transform.position.x,transform.position.y,0), Quaternion.identity);
         Destroy(enemyObject);
     }
 

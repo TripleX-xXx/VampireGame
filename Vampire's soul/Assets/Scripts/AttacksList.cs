@@ -8,7 +8,7 @@ public static class AttacksList {
     public static float cellSide = 1f;
 
     // list of private method
-    private static Vector3 getSideVector(Person person)
+    public static Vector3 getSideVector(Person person)
     {
         return MG_Sides.SideToVector3(
                         MG_Sides.EulerVectorToSide(person.GetComponent<Rigidbody>().rotation.eulerAngles)

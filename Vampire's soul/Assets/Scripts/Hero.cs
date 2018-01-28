@@ -14,10 +14,12 @@ public class Hero : Person {
     private int ingredient = 0; // the amount of ingredients for the potion
     private int potion = 0; // the amount of potions
     private int maxPotions = 1; // maximum number of potions
+    private GameObject go;
 
     private void Start()
     {
         moving = GetComponent<Moving>();
+        //go = PlaneCreator.CreatePlane(3, 2);
     }
 
     private void Update()
@@ -28,6 +30,12 @@ public class Hero : Person {
             else if (Input.GetKeyDown("s")) Action(MG_Sides.Side.down); // go Down
             else if (Input.GetKeyDown("a")) Action(MG_Sides.Side.left); // go Left
             else if (Input.GetKeyDown("d")) Action(MG_Sides.Side.right); // go Right
+        } else
+        {
+            if (Input.GetKeyDown("w")) Action(MG_Sides.Side.none); // go Up
+            else if (Input.GetKeyDown("s")) Action(MG_Sides.Side.none); // go Down
+            else if (Input.GetKeyDown("a")) Action(MG_Sides.Side.none); // go Left
+            else if (Input.GetKeyDown("d")) Action(MG_Sides.Side.none); // go Right
         }
         if (Input.GetKeyDown("k")) Action(MG_Sides.Side.none); // skip round
         else if (Input.GetKeyDown("1") || Input.GetKeyDown(KeyCode.Keypad1)) SetAbilitie(3); // choose skill 1
@@ -37,7 +45,7 @@ public class Hero : Person {
         else if (Input.GetKeyDown(KeyCode.DownArrow)) Attack(MG_Sides.Side.down); // Attack Down
         else if (Input.GetKeyDown(KeyCode.LeftArrow)) Attack(MG_Sides.Side.left); // Attack Left
         else if (Input.GetKeyDown(KeyCode.RightArrow)) Attack(MG_Sides.Side.right); // Attack Right
-        else if (Input.GetKeyDown(KeyCode.Keypad0)) DrinkPotion(); // Drink Potion
+        else if (Input.GetKeyDown("e")) DrinkPotion(); // Drink Potion
 
     }
 
@@ -87,8 +95,14 @@ public class Hero : Person {
                 selectetAbilitie = a;
                 attack = AttacksList.Attack2;
                 canvasMenager.SetHealthBarGold((currHP - 15) / maxHP);
+                go = PlaneCreator.CreatePlane(3, 2);
+                go.transform.position = this.transform.position + AttacksList.getSideVector(this) * 1f * 1.5f;
             }
-            else SetAbilitie(1);
+            else
+            {
+                SetAbilitie(1);
+                Destroy(go);
+            }
         }
     }
 
@@ -156,5 +170,6 @@ public class Hero : Person {
             potion--;
         }
     }
+
 
 }
