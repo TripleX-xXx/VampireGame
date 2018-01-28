@@ -8,7 +8,7 @@ public abstract class Person : MonoBehaviour {
     //(to implement in future)// protected Image lossOfHealth_bar; //graphic loss of health indicator
 
     protected float maxHP = 100; // the highest available level of health
-    protected float currHP = 100; // current health
+    /*protected*/ public float currHP = 100; // current health
     protected int stun = 0; // how long person can't move
 
     //public abstract bool Action(); //formerly Move()
@@ -34,11 +34,6 @@ public abstract class Person : MonoBehaviour {
         return new IntVector2(Mathf.RoundToInt(this.GetComponent<Rigidbody>().position.x), Mathf.RoundToInt(this.GetComponent<Rigidbody>().position.y));
     }
 
-    //Actions that the object will do on his in game turn (usually after the player move or attack)
-    public virtual void OnStep()
-    {
-        RoundSystem.UpdateStep();
-    }
 
     public virtual void Stune(int time, bool forced) //Stun service time-how long person will be stune forced if true add time to existed stun
     {

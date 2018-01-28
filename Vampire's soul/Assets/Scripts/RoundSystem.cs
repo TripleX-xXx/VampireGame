@@ -7,11 +7,21 @@ public static class RoundSystem {
     public static void UpdateStep()
     {
         Enemy[] objs = Object.FindObjectsOfType<Enemy>();
+        Enemy_archer[] archer = Object.FindObjectsOfType<Enemy_archer>();
         Spikes[] trap = Object.FindObjectsOfType<Spikes>();
         Mud[] mud = Object.FindObjectsOfType<Mud>();
+
         Boss boss = null;
         boss = Object.FindObjectOfType<Boss>();
         if(boss != null)boss.OnnStep();
+
+        Spawner[] spawner = null;
+        spawner = Object.FindObjectsOfType<Spawner>();
+        if (spawner != null)
+            for (int i = 0; i < spawner.Length; i++)
+            {
+                spawner[i].OnnStep();
+            }
         //Fist update the enemies, they can move and attack.
         for (int i = 0; i < objs.Length; i++)
         {
@@ -25,6 +35,11 @@ public static class RoundSystem {
         {
             mud[i].OnnStep();
         }
+        for (int i = 0; i < archer.Length; i++)
+        {
+            archer[i].OnnStep();
+        }
+        
 
     }
 

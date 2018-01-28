@@ -2,13 +2,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Enemy : Person {
+public class Enemy : Person
+{
 
     public bool flagDebug = false;
     public Hero hero;
     public Image health_bar; // graphic health indicator
     public GameObject enemyObject;
     public Transform drop;
+    public Animator anim;
 
     //How far can find the player
     public int distanceToSeePlayer = 5;
@@ -17,18 +19,21 @@ public class Enemy : Person {
 
     public bool chase = false;
 
-
+    private void Awake()
+    {
+        this.tag = "Enemy";
+        hero = UnityEngine.Object.FindObjectOfType<Hero>();
+    }
 
     //Enemy's turn to do action
     public void OnnStep()
     {
-
         CheckForPlayer();
-
-        if (flagDebug) Debug.Log(chase);
-
+        if (stun > 0) stun--;
         Chase();
     }
+
+
 
     private void Chase()
     {
@@ -37,16 +42,21 @@ public class Enemy : Person {
             if (distanceToAttack >= DistanceFromObject(hero))
             {
                 RotateToPlayer();
+                anim.SetTrigger("Attack");
                 AttacksList.EnemyAttack1(this);
             }
             else
-            GetComponent<Moving>().Move(DirectionToObj(hero));
+            {
+                if (stun == 0)
+                    GetComponent<Moving>().Move(DirectionToObj(hero));
+            }
         }
     }
-	
-	public void CheckForPlayer(){
-		
-		RaycastHit hit;
+
+    public void CheckForPlayer()
+    {
+
+        RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.up, out hit, distanceToSeePlayer))
             if (hit.collider.gameObject.tag == "Player")
                 chase = true;
@@ -56,11 +66,11 @@ public class Enemy : Person {
         if (Physics.Raycast(transform.position, (transform.up - transform.right).normalized, out hit, distanceToSeePlayer))
             if (hit.collider.gameObject.tag == "Player")
                 chase = true;
-			
-	}
 
-	// Autorotate to player position
-	public void RotateToPlayer()
+    }
+
+    // Autorotate to player position
+    public void RotateToPlayer()
     {
         Vector3 dir = transform.position - hero.transform.position;
         float angle = Mathf.Round(Vector3.Angle(dir, transform.up));
@@ -85,7 +95,7 @@ public class Enemy : Person {
     //Choose side where to go to get closer to enemy
     public MG_Sides.Side DirectionToObj(Hero obj)
     {
-        
+
         if (obj == null)
             return MG_Sides.Side.none;
 
@@ -125,7 +135,7 @@ public class Enemy : Person {
         }
         //If there is a obstacle for opt1, go to opt2.
         //If there is a obstacle of opt2, the Move Func will not let him move, so he will stay in the same place;
-        if (GetComponent<Moving>().GetFreeSides()[(int)opt1] )
+        if (GetComponent<Moving>().GetFreeSides()[(int)opt1])
         {
             if (flagDebug) Debug.Log(opt1);
             return opt1;
@@ -173,5 +183,5 @@ public class Enemy : Person {
         Destroy(enemyObject);
     }
 
-   
+
 }

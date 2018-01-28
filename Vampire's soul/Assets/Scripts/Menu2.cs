@@ -15,13 +15,13 @@ public class Menu2 : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            o.active = !o.active;
+            o.SetActive(!o.activeSelf);
         }
     }
 
     public void ContinueButton()
     {
-        o.active = !o.active;
+        o.SetActive(!o.activeSelf);
     }
 
     public void SettingsButton()

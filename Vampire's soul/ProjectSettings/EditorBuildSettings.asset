@@ -9,5 +9,8 @@ EditorBuildSettings:
     path: Assets/Levels/MG_Menu.unity
     guid: c0ca91778162aa34f830ce464066b431
   - enabled: 1
+    path: Assets/Levels/MG_LevelGenerator.unity
+    guid: a0dea3afa017e0147970adba32dec99c
+  - enabled: 1
     path: Assets/Levels/MG_AttacksTest.unity
     guid: 230ae23b67e5e3e4c9543febb4a4b67c

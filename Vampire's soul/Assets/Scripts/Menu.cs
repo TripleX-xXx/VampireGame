@@ -6,24 +6,35 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    public bool menuOnStart = true;
-    private Canvas manuUI;
+    public GameObject menu;
+    public GameObject settings;
+    public GameObject about;
+
+    public GameObject soundOn;
+    public GameObject soundOff;
+    public GameObject musicOn;
+    public GameObject musicOff;
+
 
     void Start()
     {
+        menu.SetActive(true);
+        settings.SetActive(false);
+        about.SetActive(false);
 
-        manuUI = (Canvas)GetComponent<Canvas>();
-        Cursor.visible = manuUI.enabled;
-        Cursor.lockState = CursorLockMode.Confined;
-        if(!menuOnStart)manuUI.enabled = !manuUI.enabled;
+        soundOn.SetActive(true);
+        soundOff.SetActive(false);
+        musicOn.SetActive(true);
+        musicOff.SetActive(false);
     }
 
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            manuUI.enabled = !manuUI.enabled;
-            Cursor.visible = manuUI.enabled;
+            menu.SetActive(true);
+            settings.SetActive(false);
+            about.SetActive(false);
         }
     }
 
@@ -37,20 +48,53 @@ public class Menu : MonoBehaviour
         Application.Quit();
     }
 
-    public void CountinueButton()
-    {
-        manuUI.enabled = !manuUI.enabled;
-        Cursor.visible = manuUI.enabled;
-    }
-
     public void SettingButton()
     {
-        //To do
+        menu.SetActive(false);
+        settings.SetActive(true);
+        about.SetActive(false);
     }
 
     public void AboutButton()
     {
-        //To do
+        menu.SetActive(false);
+        settings.SetActive(false);
+        about.SetActive(true);
+    }
+
+    public void FullScreenButton()
+    {
+        Screen.fullScreen = !Screen.fullScreen;
+    }
+
+    public void SoundOnButton()
+    {
+        //ToDo
+        soundOff.SetActive(false);
+        soundOn.SetActive(true);
+        Debug.Log("SoundOn");
+    }
+
+    public void SoundOffButton()
+    {
+        //ToDo
+        soundOn.SetActive(false);
+        soundOff.SetActive(true);
+        Debug.Log("SoundOff");
+    }
+
+    public void MusicOnButton()
+    {
+        //ToDo
+        musicOff.SetActive(false);
+        musicOn.SetActive(true);
+    }
+
+    public void MusicOffButton()
+    {
+        //ToDo
+        musicOn.SetActive(false);
+        musicOff.SetActive(true);
     }
 
 }

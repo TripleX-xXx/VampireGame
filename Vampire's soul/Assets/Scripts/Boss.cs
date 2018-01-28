@@ -18,6 +18,16 @@ public class Boss : Person
 
     private int count = 0;
 
+    private void Start()
+    {
+        maxHP = 250;
+        currHP = 250;
+
+        this.tag = "Enemy";
+        hero = UnityEngine.Object.FindObjectOfType<Hero>();
+
+    }
+
     //Enemy's turn to do action
     public void OnnStep()
     {
@@ -35,7 +45,6 @@ public class Boss : Person
             if (count < 3 && distanceToSeePlayer >= DistanceFromObject(hero))
             {
                 if (flagDebug) Debug.LogError("SmallBAM");
-                RotateToPlayer();
                 AttackE(hero, 5);
             } else if(count == 3 && distanceToAttack >= DistanceFromObject(hero))
             {

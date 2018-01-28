@@ -5,6 +5,12 @@ public class Spikes : MonoBehaviour {
     public bool flagDebug = false;
     public float cellSize = 1;
     public Animator animator;
+    private MG_AudioManager audioManager;
+
+    private void Start()
+    {
+        audioManager = FindObjectOfType<MG_AudioManager>();
+    }
 
     public void OnnStep()
     {
@@ -14,6 +20,7 @@ public class Spikes : MonoBehaviour {
         {
             if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "Enemy")
             {
+                audioManager.Play("Trap");
                 animator.SetTrigger("Attack");
                 hit.collider.GetComponent<Person>().TakeDmg(20);
             }
