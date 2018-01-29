@@ -10,6 +10,7 @@ public static class RoundSystem {
         Enemy_archer[] archer = Object.FindObjectsOfType<Enemy_archer>();
         Spikes[] trap = Object.FindObjectsOfType<Spikes>();
         Mud[] mud = Object.FindObjectsOfType<Mud>();
+        Door[] door = Object.FindObjectsOfType<Door>();
 
         Boss boss = null;
         boss = Object.FindObjectOfType<Boss>();
@@ -39,7 +40,11 @@ public static class RoundSystem {
         {
             archer[i].OnnStep();
         }
-        
+        for (int i = 0; i < door.Length; i++)
+        {
+            door[i].OnnStep();
+        }
+
 
     }
 
