@@ -7,12 +7,14 @@ public class Menu2 : MonoBehaviour {
 
     public GameObject menu;
     public GameObject settings;
+    private MG_AudioManager audioManager;
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        audioManager = FindObjectOfType<MG_AudioManager>();
         menu.SetActive(false);
         settings.SetActive(false);
-
     }
 	
 	// Update is called once per frame
@@ -36,26 +38,26 @@ public class Menu2 : MonoBehaviour {
 
     public void SoundOnButton()
     {
-        //ToDo
-        Debug.Log("SoundOn");
+        audioManager.Sounds(true);
+        //Debug.Log("SoundOn");
     }
 
     public void SoundOffButton()
     {
-        //ToDo
-        Debug.Log("SoundOff");
+        audioManager.Sounds(false);
+        //Debug.Log("SoundOff");
     }
 
     public void MusicOnButton()
     {
-        //ToDo
-        Debug.Log("MusicOn");
+        audioManager.Music(true);
+        //Debug.Log("MusicOn");
     }
 
     public void MusicOffButton()
     {
-        //ToDo
-        Debug.Log("MusicOff");
+        audioManager.Music(false);
+        //Debug.Log("MusicOff");
     }
 
     public void ExitButton()

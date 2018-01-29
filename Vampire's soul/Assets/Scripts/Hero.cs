@@ -123,13 +123,13 @@ public class Hero : Person {
         if (selectetAbilitie == 1)
         {
             canvasMenager.UseBite();
-            animator.SetTrigger("Attack2");
+            animator.SetTrigger("Attack1");
             audioManager.Play("Bite");
         }
         if (selectetAbilitie == 2)
         {
             canvasMenager.UseBlink();
-            animator.SetTrigger("Attack2");
+            //animator.SetTrigger("Attack2");
             audioManager.Play("Teleport");
         }
         if (selectetAbilitie == 3)
@@ -147,7 +147,7 @@ public class Hero : Person {
 
     public override void TakeDmg(float dmg)
     {
-        if (dmg > 1) animator.SetTrigger("GetHit");
+        if (dmg > 1) animator.SetTrigger("GetDmg");
         currHP -= dmg;
         if (currHP < 0) currHP = 0;
         if (currHP > maxHP) currHP = maxHP;
