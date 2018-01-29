@@ -13,21 +13,15 @@ public class Hero : Person {
     private Moving moving;
     private int ingredient = 0; // the amount of ingredients for the potion
     private int potion = 0; // the amount of potions
-    private int maxPotions = 1; // maximum number of potions
-<<<<<<< HEAD
-    private GameObject go;
-=======
+    private int maxPotions = 3; // maximum number of potions
+    public GameObject go;
     private MG_AudioManager audioManager;
->>>>>>> master
+
 
     private void Start()
     {
         moving = GetComponent<Moving>();
-<<<<<<< HEAD
-        //go = PlaneCreator.CreatePlane(3, 2);
-=======
         audioManager = FindObjectOfType<MG_AudioManager>();
->>>>>>> master
     }
 
     private void Update()
@@ -104,13 +98,12 @@ public class Hero : Person {
                 selectetAbilitie = a;
                 attack = AttacksList.Attack2;
                 canvasMenager.SetHealthBarGold((currHP - 15) / maxHP);
-                go = PlaneCreator.CreatePlane(3, 2);
-                go.transform.position = this.transform.position + AttacksList.getSideVector(this) * 1f * 1.5f;
+                go.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0.49f) ;
             }
             else
             {
                 SetAbilitie(1);
-                Destroy(go);
+               // Destroy(go);
             }
         }
     }

@@ -1070,7 +1070,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1220126242354666}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: -0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 2, y: 1.5, z: 2}
   m_Children:
   - {fileID: 4175949474608422}
@@ -1575,7 +1575,7 @@ MonoBehaviour:
   health_bar: {fileID: 114338910312447750}
   enemyObject: {fileID: 1716519828687754}
   drop: {fileID: 4481620768097032, guid: 0328c0e30f5e9ee4d98573c9f618c4f3, type: 2}
-  anim: {fileID: 0}
+  anim: {fileID: 95242379583182772}
   distanceToSeePlayer: 5
   distanceToAttack: 3
   chase: 0

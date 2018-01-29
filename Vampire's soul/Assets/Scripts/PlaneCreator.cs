@@ -34,6 +34,7 @@ public static class PlaneCreator {
         m.RecalculateNormals();
         var g = go.transform.rotation.x - 180;
         go.transform.rotation = new Quaternion(g, 0,0,0);
+
         return go;
     }
 }
