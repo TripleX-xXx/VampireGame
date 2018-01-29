@@ -541,6 +541,7 @@ GameObject:
   - component: {fileID: 54728392693147466}
   - component: {fileID: 114093263448793176}
   - component: {fileID: 114934132319460388}
+  - component: {fileID: 65787697664501976}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -637,7 +638,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1933360995385090}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20, y: -20, z: 0}
+  m_LocalPosition: {x: -19, y: -47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4485962506985230}
@@ -1174,6 +1175,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65787697664501976
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1933360995385090}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65970679144194002
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1229,7 +1242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currHP: 100
   canvasMenager: {fileID: 0}
-  animator: {fileID: 0}
+  animator: {fileID: 95481080692358370}
 --- !u!137 &137049042187080400
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

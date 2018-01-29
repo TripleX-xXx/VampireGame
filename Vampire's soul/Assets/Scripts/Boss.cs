@@ -9,6 +9,7 @@ public class Boss : Person
     public Hero hero;
     public Image health_bar; // graphic health indicator
     public GameObject enemyObject;
+    public Animator animator;
 
     //How far can find the player
     public int distanceToSeePlayer = 5;
@@ -47,10 +48,12 @@ public class Boss : Person
             {
                 if (flagDebug) Debug.LogError("SmallBAM");
                 AttackE(hero, 5);
+                animator.SetTrigger("Attack1");
             } else if(count == 3 && distanceToAttack >= DistanceFromObject(hero))
             {
                 if (flagDebug) Debug.LogError("BigBAM");
                 AttackE(hero, 20);
+                animator.SetTrigger("Attack2");
             }  
     }
 
@@ -103,6 +106,7 @@ public class Boss : Person
 
     public override void TakeDmg(float dmg)
     {
+        animator.SetTrigger("GetDmg");
         currHP -= dmg;
         if (currHP < 0) currHP = 0;
         if (currHP > maxHP) currHP = maxHP;

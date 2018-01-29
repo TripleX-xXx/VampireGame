@@ -9,9 +9,11 @@ public class Menu : MonoBehaviour
     public GameObject menu;
     public GameObject settings;
     public GameObject about;
+    private MG_AudioManager audioManager;
 
     void Start()
     {
+        audioManager = FindObjectOfType<MG_AudioManager>();
         menu.SetActive(true);
         settings.SetActive(false);
         about.SetActive(false);
@@ -58,26 +60,26 @@ public class Menu : MonoBehaviour
 
     public void SoundOnButton()
     {
-        //ToDo
-        Debug.Log("SoundOn");
+        audioManager.Sounds(true);
+        //Debug.Log("SoundOn");
     }
 
     public void SoundOffButton()
     {
-        //ToDo
-        Debug.Log("SoundOff");
+        audioManager.Sounds(false);
+        //Debug.Log("SoundOff");
     }
 
     public void MusicOnButton()
     {
-        //ToDo
-        Debug.Log("MusicOn");
+        audioManager.Music(true);
+        //Debug.Log("MusicOn");
     }
 
     public void MusicOffButton()
     {
-        //ToDo
-        Debug.Log("MusicOff");
+        audioManager.Music(false);
+        //Debug.Log("MusicOff");
     }
 
 }

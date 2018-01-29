@@ -1488,6 +1488,7 @@ MonoBehaviour:
   hero: {fileID: 0}
   health_bar: {fileID: 114792750747661722}
   enemyObject: {fileID: 1572852576222628}
+  animator: {fileID: 95536852836949426}
   distanceToSeePlayer: 5
   distanceToAttack: 1
 --- !u!114 &114170965498132116

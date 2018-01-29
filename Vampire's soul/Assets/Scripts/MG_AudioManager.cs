@@ -7,6 +7,8 @@ public class MG_AudioManager : MonoBehaviour {
 
     public static MG_AudioManager instance;
 
+    private bool sound = true;
+
     void Awake ()
     {
         if(instance == null)
@@ -39,6 +41,7 @@ public class MG_AudioManager : MonoBehaviour {
 
     public void Play (string name)
     {
+        if (name != "bacground" && !sound) return;
         Sound s = Array.Find(sounds, Sound => Sound.name == name);
         if (s == null)
         {
@@ -46,6 +49,28 @@ public class MG_AudioManager : MonoBehaviour {
             return;
         }
         s.source.Play();
+    }
+
+    public void Stop(string name)
+    {
+        Sound s = Array.Find(sounds, Sound => Sound.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + name + "not found!");
+            return;
+        }
+        s.source.Stop();
+    }
+
+    public void Sounds(bool value)
+    {
+        sound = value;
+    }
+
+    public void Music(bool value)
+    {
+        if (value) Play("bacground");
+        else Stop("bacground");
     }
 
 }
