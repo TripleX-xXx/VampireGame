@@ -137,9 +137,9 @@ public class CanvasManager : MonoBehaviour {
         }
         if (stuneCoolDownCurrent > 0)
         {
-            Debug.Log(stuneCoolDownCurrent);
+            //Debug.Log(stuneCoolDownCurrent);
             stuneCoolDownCurrent--;
-            Debug.Log(stuneCoolDownCurrent);
+            //Debug.Log(stuneCoolDownCurrent);
             stune.fillAmount = (float)stuneCoolDownCurrent / stuneCoolDown;
         }
         if (stuneCoolDownCurrent <= 0 && stuneCoolDown != 0)
