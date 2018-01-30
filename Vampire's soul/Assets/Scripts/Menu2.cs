@@ -7,6 +7,7 @@ public class Menu2 : MonoBehaviour {
 
     public GameObject menu;
     public GameObject settings;
+
     private MG_AudioManager audioManager;
 
     // Use this for initialization

@@ -21,6 +21,12 @@ public class CanvasManager : MonoBehaviour {
 
     public Image stune;
 
+    public GameObject WinLose;
+    public GameObject WinText;
+    public GameObject WinButton;
+    public GameObject LoseText;
+    public GameObject LoseButton;
+
     private int biteCoolDown = 1;
     private int blinkCoolDown = 6;
     private int waveCoolDown = 4;
@@ -149,6 +155,16 @@ public class CanvasManager : MonoBehaviour {
         }
     }
 
+    public void WinScreen()
+    {
+
+    }
+
+    public void LoseScreen()
+    {
+
+    }
+
     private void Awake()
     {
         biteIcon.enabled = true;
@@ -157,6 +173,12 @@ public class CanvasManager : MonoBehaviour {
         potionFrame.enabled = false;
         potion.fillAmount = 0;
         stune.fillAmount = 0;
+
+        WinLose.SetActive(false);
+        WinText.SetActive(false);
+        WinButton.SetActive(false);
+        LoseText.SetActive(false);
+        LoseButton.SetActive(false);
     }
 
 }
