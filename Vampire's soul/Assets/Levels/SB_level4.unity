@@ -155,12 +155,12 @@ Prefab:
     - target: {fileID: 224122396148421590, guid: 72866392a4b56444cb307eafa61e2385,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 460
+      value: 460.5
       objectReference: {fileID: 0}
     - target: {fileID: 224122396148421590, guid: 72866392a4b56444cb307eafa61e2385,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 324
+      value: 323.5
       objectReference: {fileID: 0}
     - target: {fileID: 4904340445101954, guid: 72866392a4b56444cb307eafa61e2385, type: 2}
       propertyPath: m_LocalRotation.x
@@ -216,11 +216,24 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 243
       objectReference: {fileID: 0}
+<<<<<<< HEAD
+    - target: {fileID: 114007205409067040, guid: 72866392a4b56444cb307eafa61e2385,
+        type: 2}
+      propertyPath: maps.Array.data[0]
+      value: 
+      objectReference: {fileID: 2800000, guid: d7189076312db44eea87cd2f4e0442ec, type: 3}
+    - target: {fileID: 114007205409067040, guid: 72866392a4b56444cb307eafa61e2385,
+        type: 2}
+      propertyPath: maps.Array.data[1]
+      value: 
+      objectReference: {fileID: 2800000, guid: 138880daba5c14a99b8fdbe2181479c6, type: 3}
+=======
     - target: {fileID: 114305416045998496, guid: 72866392a4b56444cb307eafa61e2385,
         type: 2}
       propertyPath: scene
       value: 2
       objectReference: {fileID: 0}
+>>>>>>> 19c4b6f17175f62edb24e7ad5bccd626dff476ef
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72866392a4b56444cb307eafa61e2385, type: 2}
   m_IsPrefabParent: 0
