@@ -14,7 +14,8 @@ public class Hero : Person {
     private int ingredient = 0; // the amount of ingredients for the potion
     private int potion = 0; // the amount of potions
     private int maxPotions = 3; // maximum number of potions
-    public GameObject go;
+    public GameObject waveplane;
+    public GameObject blinkplane;
     private MG_AudioManager audioManager;
 
 
@@ -33,12 +34,12 @@ public class Hero : Person {
             else if (Input.GetKeyDown("a")) Action(MG_Sides.Side.left); // go Left
             else if (Input.GetKeyDown("d")) Action(MG_Sides.Side.right); // go Right
         } else
-        {
-            if (Input.GetKeyDown("w")) Action(MG_Sides.Side.none); // go Up
-            else if (Input.GetKeyDown("s")) Action(MG_Sides.Side.none); // go Down
-            else if (Input.GetKeyDown("a")) Action(MG_Sides.Side.none); // go Left
-            else if (Input.GetKeyDown("d")) Action(MG_Sides.Side.none); // go Right
-        }
+            {
+                if (Input.GetKeyDown("w")) Action(MG_Sides.Side.none); // go Up
+                else if (Input.GetKeyDown("s")) Action(MG_Sides.Side.none); // go Down
+                else if (Input.GetKeyDown("a")) Action(MG_Sides.Side.none); // go Left
+                else if (Input.GetKeyDown("d")) Action(MG_Sides.Side.none); // go Right
+            }
         if (Input.GetKeyDown("k")) Action(MG_Sides.Side.none); // skip round
         else if (Input.GetKeyDown("1") || Input.GetKeyDown(KeyCode.Keypad1)) SetAbilitie(3); // choose skill 1
         else if (Input.GetKeyDown("2") || Input.GetKeyDown(KeyCode.Keypad2)) SetAbilitie(2); // choose skill 2
@@ -58,6 +59,27 @@ public class Hero : Person {
 
         if (side == MG_Sides.Side.none) flagRoundEnd = true;
         else flagRoundEnd = moving.Move(side);
+
+            //if (side == MG_Sides.Side.up)
+            //{
+            //    go.transform.position = new Vector3(this.GetComponent<Rigidbody>().position.x, this.GetComponent<Rigidbody>().position.y + 1.5f, 0.49f);
+            //    go.transform.rotation = new Quaternion(0, 90, -90, 0);
+            //}
+            //else if (side == MG_Sides.Side.down)
+            //{
+            //    go.transform.position = new Vector3(this.GetComponent<Rigidbody>().position.x, this.GetComponent<Rigidbody>().position.y - 1.5f, 0.49f);
+            //    go.transform.rotation = new Quaternion(0, 90, -90, 0);
+            //}
+            //else if (side == MG_Sides.Side.left)
+            //{
+            //    go.transform.position = new Vector3(this.GetComponent<Rigidbody>().position.x - 1.5f, this.GetComponent<Rigidbody>().position.y, 0.49f);
+            //    go.transform.rotation = new Quaternion(-90, 90, -90, 90);
+            //}
+            //else if (side == MG_Sides.Side.right)
+            //{
+            //    go.transform.position = new Vector3(this.GetComponent<Rigidbody>().position.x + 1.5f, this.GetComponent<Rigidbody>().position.y, 0.49f);
+            //    go.transform.rotation = new Quaternion(-90, 90, -90, 90);
+            //}
 
         if (flagRoundEnd)
         {
@@ -87,9 +109,14 @@ public class Hero : Person {
             {
                 selectetAbilitie = a;
                 attack = AttacksList.Attack3;
-                canvasMenager.SetHealthBarGold((currHP-5) / maxHP);
+                canvasMenager.SetHealthBarGold((currHP - 5) / maxHP);
+                blinkplane.SetActive(true);
             }
-            else SetAbilitie(1);
+            else
+            {
+                SetAbilitie(1);
+                blinkplane.SetActive(false);
+            }
         }
         else if (a == 3)
         {
@@ -98,12 +125,12 @@ public class Hero : Person {
                 selectetAbilitie = a;
                 attack = AttacksList.Attack2;
                 canvasMenager.SetHealthBarGold((currHP - 15) / maxHP);
-                go.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0.49f) ;
+                waveplane.SetActive(true);
             }
             else
             {
                 SetAbilitie(1);
-               // Destroy(go);
+                waveplane.SetActive(false);
             }
         }
     }
@@ -181,9 +208,9 @@ public class Hero : Person {
         if(potion < maxPotions)
         {
             audioManager.Play("Ingredient");
-            if (++ingredient >= 3)
+            if (++ingredient >= 2)
             {
-                ingredient = 0;
+                ingredient -= 2;
                 potion++;
                 // add graphic representation
             }
