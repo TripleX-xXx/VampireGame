@@ -13,7 +13,9 @@ public class Hero : Person {
     private Moving moving;
     private int ingredient = 0; // the amount of ingredients for the potion
     private int potion = 0; // the amount of potions
-    private int maxPotions = 1; // maximum number of potions
+    private int maxPotions = 3; // maximum number of potions
+    public GameObject waveplane;
+    public GameObject blinkplane;
     private MG_AudioManager audioManager;
 
     private void Start()
@@ -80,8 +82,13 @@ public class Hero : Person {
                 selectetAbilitie = a;
                 attack = AttacksList.Attack3;
                 canvasMenager.SetHealthBarGold((currHP-5) / maxHP);
+                blinkplane.SetActive(true);
             }
-            else SetAbilitie(1);
+            else
+            {
+                SetAbilitie(1);
+                blinkplane.SetActive(false);
+            }
         }
         else if (a == 3)
         {
@@ -90,8 +97,13 @@ public class Hero : Person {
                 selectetAbilitie = a;
                 attack = AttacksList.Attack2;
                 canvasMenager.SetHealthBarGold((currHP - 15) / maxHP);
+                waveplane.SetActive(true);
             }
-            else SetAbilitie(1);
+            else
+            {
+                SetAbilitie(1);
+                waveplane.SetActive(false);
+            }
         }
     }
 
@@ -168,9 +180,9 @@ public class Hero : Person {
         if(potion < maxPotions)
         {
             audioManager.Play("Ingredient");
-            if (++ingredient >= 3)
+            if (++ingredient >= 2)
             {
-                ingredient = 0;
+                ingredient -= 2;
                 potion++;
                 // add graphic representation
             }
