@@ -7,6 +7,8 @@ public class Hero : Person {
     public IntVector2 posit;
     public CanvasManager canvasMenager;
     public Animator animator;
+    public ParticleSystem wave;
+    public ParticleSystem blink;
 
     private delegate float AttackType(Person p);
     private AttackType attack = AttacksList.Attack1;
@@ -127,12 +129,14 @@ public class Hero : Person {
         }
         if (selectetAbilitie == 2)
         {
+            blink.Play();
             canvasMenager.UseBlink();
             //animator.SetTrigger("Attack2");
             audioManager.Play("Teleport");
         }
         if (selectetAbilitie == 3)
         {
+            wave.Play();
             canvasMenager.UseWave();
             animator.SetTrigger("Attack2");
             audioManager.Play("Bite");
