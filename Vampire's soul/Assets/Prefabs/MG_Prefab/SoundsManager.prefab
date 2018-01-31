@@ -136,3 +136,15 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: bacground
+    clip: {fileID: 8300000, guid: 6c1a965edbe8948ffa199075d3247681, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: BossFight
+    clip: {fileID: 8300000, guid: 6221fd320f4af4aa89f2ce7be17867c1, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}

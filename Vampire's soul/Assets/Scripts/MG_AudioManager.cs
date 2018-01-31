@@ -36,12 +36,12 @@ public class MG_AudioManager : MonoBehaviour {
 
     void Start()
     {
-        //Play("bacground");
+        Play("bacground");
     }
 
     public void Play (string name)
     {
-        if (name != "bacground" && !sound) return;
+        if ((name != "bacground" || name != "BossFight") && !sound) return;
         Sound s = Array.Find(sounds, Sound => Sound.name == name);
         if (s == null)
         {
@@ -70,7 +70,17 @@ public class MG_AudioManager : MonoBehaviour {
     public void Music(bool value)
     {
         if (value) Play("bacground");
-        else Stop("bacground");
+        else
+        {
+            Stop("bacground");
+            Stop("BossFight");
+        }
+    }
+
+    public void Boss()
+    {
+        Stop("bacground");
+        Play("BossFight");
     }
 
 }

@@ -28,6 +28,7 @@ public class Boss : Person
         this.tag = "Enemy";
         hero = UnityEngine.Object.FindObjectOfType<Hero>();
         audioManager = FindObjectOfType<MG_AudioManager>();
+        audioManager.Boss();
     }
 
     //Enemy's turn to do action
