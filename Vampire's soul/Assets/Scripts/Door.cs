@@ -20,6 +20,7 @@ public class Door : MonoBehaviour {
             if (hit.collider.gameObject.tag == "Player")
             {
                 audioManager.Play("NextLevel");
+                audioManager.SaveScore();
                 SceneManager.LoadScene(scene);
             }
         }

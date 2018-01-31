@@ -150,7 +150,11 @@ public class Hero : Person {
 
     public override void TakeDmg(float dmg)
     {
-        if (dmg > 1) animator.SetTrigger("GetDmg");
+        if (dmg > 1)
+        {
+            animator.SetTrigger("GetDmg");
+            audioManager.scoreCurr += dmg;
+        }
         currHP -= dmg;
         if (currHP < 0) currHP = 0;
         if (currHP > maxHP) currHP = maxHP;

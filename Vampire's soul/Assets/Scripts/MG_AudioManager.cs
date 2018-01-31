@@ -5,9 +5,28 @@ public class MG_AudioManager : MonoBehaviour {
 
     public Sound[] sounds;
 
+    public float scoreCurr = 0;
+    private float score = 0;
+
     public static MG_AudioManager instance;
 
     private bool sound = true;
+
+    public void SaveScore()
+    {
+        score = scoreCurr;
+    }
+
+    public void RestartScore()
+    {
+        scoreCurr = score;
+    }
+
+    public void ZeroScore()
+    {
+        score = 0;
+        scoreCurr = 0;
+    }
 
     void Awake ()
     {

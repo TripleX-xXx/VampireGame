@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu2 : MonoBehaviour {
 
     public GameObject menu;
     public GameObject settings;
+    public Text score;
     public int scen = 0;
 
     private MG_AudioManager audioManager;
@@ -26,15 +28,18 @@ public class Menu2 : MonoBehaviour {
             if(settings.activeSelf) settings.SetActive(false);
             else menu.SetActive(!menu.activeSelf);
         }
+        score.text = "score: "+audioManager.scoreCurr;
     }
 
     public void RestartButton()
     {
+        audioManager.RestartScore();
         SceneManager.LoadScene(scen);
     }
 
     public void NewGameButton()
     {
+        audioManager.ZeroScore();
         SceneManager.LoadScene(1);
     }
 
@@ -74,6 +79,7 @@ public class Menu2 : MonoBehaviour {
 
     public void ExitButton()
     {
+        audioManager.ZeroScore();
         SceneManager.LoadScene(0);
     }
 }
