@@ -48,7 +48,7 @@ public class Boss : Person
             if (count < 3 && distanceToSeePlayer >= DistanceFromObject(hero))
             {
                 if (flagDebug) Debug.LogError("SmallBAM");
-                AttackE(hero, 5);
+                AttackE(hero, 3);
                 animator.SetTrigger("Attack1");
             } else if(count == 3 && distanceToAttack >= DistanceFromObject(hero))
             {

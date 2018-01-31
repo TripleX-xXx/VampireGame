@@ -51,7 +51,8 @@ public class Enemy_archer : Person {
                 RotateToPlayer();
                 anim.SetTrigger("Attack");
                 audioManager.Play("Bow");
-                AttacksList.EnemyAttack1(this);
+                //AttacksList.EnemyAttack1(this);
+                AttackE(hero, 2);
             }
             else
             {
@@ -60,8 +61,13 @@ public class Enemy_archer : Person {
             }
         }
     }
-	
-	public void CheckForPlayer(){
+
+    public void AttackE(Hero P, float dmg)
+    {
+        P.TakeDmg(dmg);
+    }
+
+public void CheckForPlayer(){
 		
 		RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.up, out hit, distanceToSeePlayer))

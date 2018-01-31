@@ -16,7 +16,7 @@ public class Spawner : MonoBehaviour {
             sleeptime = 5;
             enemyObj.hero = Object.FindObjectOfType<Hero>();
             enemyObj.tag = "Enemy";
-            Instantiate(enemyObj, new Vector3(this.transform.position.x, this.transform.position.y - 1, this.transform.position.z), enemyObj.transform.rotation);
+            Instantiate(enemyObj, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), enemyObj.transform.rotation);
         }
     }
 
@@ -25,9 +25,12 @@ public class Spawner : MonoBehaviour {
     {
         Enemy[] objs = Object.FindObjectsOfType<Enemy>();
         Hero player = Object.FindObjectOfType<Hero>();
+        Boss boss = Object.FindObjectOfType<Boss>();
+        
+        if (boss == null) sleeptime = 5;
         for (int i = 0; i < objs.Length; i++)
         {
-            if (objs[i].transform.position == new Vector3(this.transform.position.x, this.transform.position.y - 1, this.transform.position.z) || player.transform.position == new Vector3(this.transform.position.x, this.transform.position.y - 1, this.transform.position.z))
+            if (objs[i].transform.position == new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z) || player.transform.position == new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z))
             {
                 sleeptime = 5;
                 return true;
