@@ -157,12 +157,16 @@ public class CanvasManager : MonoBehaviour {
 
     public void WinScreen()
     {
-
+        WinLose.SetActive(true);
+        WinText.SetActive(true);
+        WinButton.SetActive(true);
     }
 
     public void LoseScreen()
     {
-
+        WinLose.SetActive(true);
+        LoseText.SetActive(true);
+        LoseButton.SetActive(true);
     }
 
     private void Awake()

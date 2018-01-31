@@ -157,6 +157,7 @@ public class Hero : Person {
     protected override void Die()
     {
         audioManager.Play("Lose");
+        canvasMenager.LoseScreen();
         Destroy(gameObject);
         //GameOver();
     }

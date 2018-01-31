@@ -7,6 +7,7 @@ public class Menu2 : MonoBehaviour {
 
     public GameObject menu;
     public GameObject settings;
+    public int scen = 0;
 
     private MG_AudioManager audioManager;
 
@@ -25,6 +26,16 @@ public class Menu2 : MonoBehaviour {
             if(settings.activeSelf) settings.SetActive(false);
             else menu.SetActive(!menu.activeSelf);
         }
+    }
+
+    public void RestartButton()
+    {
+        SceneManager.LoadScene(scen);
+    }
+
+    public void NewGameButton()
+    {
+        SceneManager.LoadScene(1);
     }
 
     public void ContinueButton()

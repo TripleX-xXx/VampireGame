@@ -237,6 +237,11 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 7534134}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &11397837 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1452698718258122, guid: f9c67a5e4d591ce4d84bb941e41dc927,
+    type: 2}
+  m_PrefabInternal: {fileID: 1974078858}
 --- !u!1 &16532010
 GameObject:
   m_ObjectHideFlags: 0
@@ -6850,6 +6855,11 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 800696569}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &822747086 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1914827324470656, guid: f9c67a5e4d591ce4d84bb941e41dc927,
+    type: 2}
+  m_PrefabInternal: {fileID: 1974078858}
 --- !u!1 &833866643
 GameObject:
   m_ObjectHideFlags: 0
@@ -7639,6 +7649,8 @@ MonoBehaviour:
   currHP: 100
   canvasMenager: {fileID: 148046469}
   animator: {fileID: 1349277961}
+  waveplane: {fileID: 0}
+  blinkplane: {fileID: 0}
 --- !u!65 &886327766
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8616,6 +8628,11 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 996625850}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1011642379 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1248467251353898, guid: f9c67a5e4d591ce4d84bb941e41dc927,
+    type: 2}
+  m_PrefabInternal: {fileID: 1974078858}
 --- !u!1 &1030053134
 GameObject:
   m_ObjectHideFlags: 0
@@ -11333,6 +11350,11 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1328609783}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1335317482 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1682874975862618, guid: f9c67a5e4d591ce4d84bb941e41dc927,
+    type: 2}
+  m_PrefabInternal: {fileID: 1974078858}
 --- !u!95 &1349277961 stripped
 Animator:
   m_PrefabParentObject: {fileID: 95048976890520718, guid: 703db26cecf22ea4b97310d828799c9a,
@@ -12468,6 +12490,11 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1551880485}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1566171137 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1044946426509366, guid: f9c67a5e4d591ce4d84bb941e41dc927,
+    type: 2}
+  m_PrefabInternal: {fileID: 1974078858}
 --- !u!95 &1579756730 stripped
 Animator:
   m_PrefabParentObject: {fileID: 95024634623667266, guid: ac6ccb832b4563e43badb1fe5dd852ce,
@@ -16051,6 +16078,7 @@ MonoBehaviour:
   hero: {fileID: 886327761}
   health_bar: {fileID: 468313981}
   enemyObject: {fileID: 1966208403}
+  animator: {fileID: 0}
   distanceToSeePlayer: 5
   distanceToAttack: 1
 --- !u!114 &1966208408
@@ -16267,6 +16295,41 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114427340593955154, guid: f9c67a5e4d591ce4d84bb941e41dc927,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NewGameButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 114796950841973042, guid: f9c67a5e4d591ce4d84bb941e41dc927,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 114082102127614590, guid: f9c67a5e4d591ce4d84bb941e41dc927,
+        type: 2}
+      propertyPath: WinLose
+      value: 
+      objectReference: {fileID: 1011642379}
+    - target: {fileID: 114082102127614590, guid: f9c67a5e4d591ce4d84bb941e41dc927,
+        type: 2}
+      propertyPath: WinText
+      value: 
+      objectReference: {fileID: 1566171137}
+    - target: {fileID: 114082102127614590, guid: f9c67a5e4d591ce4d84bb941e41dc927,
+        type: 2}
+      propertyPath: WinButton
+      value: 
+      objectReference: {fileID: 11397837}
+    - target: {fileID: 114082102127614590, guid: f9c67a5e4d591ce4d84bb941e41dc927,
+        type: 2}
+      propertyPath: LoseText
+      value: 
+      objectReference: {fileID: 1335317482}
+    - target: {fileID: 114082102127614590, guid: f9c67a5e4d591ce4d84bb941e41dc927,
+        type: 2}
+      propertyPath: LoseButton
+      value: 
+      objectReference: {fileID: 822747086}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f9c67a5e4d591ce4d84bb941e41dc927, type: 2}
   m_IsPrefabParent: 0

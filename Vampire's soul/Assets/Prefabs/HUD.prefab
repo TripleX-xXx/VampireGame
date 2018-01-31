@@ -1488,6 +1488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 1665793593686566}
   settings: {fileID: 1997038093406708}
+  scen: 0
 --- !u!114 &114071146620379714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1589,6 +1590,11 @@ MonoBehaviour:
   potion: {fileID: 114537318159433162}
   potionFrame: {fileID: 114307130080128110}
   stune: {fileID: 114783000544886580}
+  WinLose: {fileID: 1248467251353898}
+  WinText: {fileID: 1044946426509366}
+  WinButton: {fileID: 1452698718258122}
+  LoseText: {fileID: 1682874975862618}
+  LoseButton: {fileID: 1914827324470656}
 --- !u!114 &114089194644555126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2328,7 +2334,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114069976147693520}
-        m_MethodName: ContinueButton
+        m_MethodName: NewGameButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3219,7 +3225,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114069976147693520}
-        m_MethodName: ContinueButton
+        m_MethodName: RestartButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
