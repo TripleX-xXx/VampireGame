@@ -9,17 +9,11 @@ EditorBuildSettings:
     path: Assets/Levels/MG_Menu.unity
     guid: c0ca91778162aa34f830ce464066b431
   - enabled: 1
-    path: Assets/Levels/SB_level4.unity
-    guid: 524c2b9ccf1bd4b308494556c0d095e3
+    path: Assets/Levels/SB_WWW.unity
+    guid: 4303554b141316a4fb648cd0b5a899e2
   - enabled: 1
     path: Assets/Levels/SB_level5.unity
     guid: d25e8c3a0931f4997aa76d0962e8c635
   - enabled: 1
     path: Assets/Levels/SB_level6.unity
     guid: 6ba84a1c6286d403abf7aaf6253c70e4
-  - enabled: 1
-    path: Assets/Levels/MG_LevelGenerator.unity
-    guid: a0dea3afa017e0147970adba32dec99c
-  - enabled: 1
-    path: Assets/Levels/MG_AttacksTest.unity
-    guid: 230ae23b67e5e3e4c9543febb4a4b67c

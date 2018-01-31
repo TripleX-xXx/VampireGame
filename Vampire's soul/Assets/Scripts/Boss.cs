@@ -16,6 +16,7 @@ public class Boss : Person
     //How close it need to be to attack
     public int distanceToAttack = 1;
     private MG_AudioManager audioManager;
+    private CanvasManager cm;
 
 
     private int count = 0;
@@ -28,6 +29,7 @@ public class Boss : Person
         this.tag = "Enemy";
         hero = UnityEngine.Object.FindObjectOfType<Hero>();
         audioManager = FindObjectOfType<MG_AudioManager>();
+        cm = FindObjectOfType<CanvasManager>();
         audioManager.Boss();
     }
 
@@ -117,7 +119,8 @@ public class Boss : Person
 
     protected override void Die() // things that happen while the object dies
     {
-
+        cm.WinScreen();
+        audioManager.Play("Win");
         Destroy(enemyObject);
     }
 
