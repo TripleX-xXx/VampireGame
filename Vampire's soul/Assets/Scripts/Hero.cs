@@ -43,7 +43,7 @@ public class Hero : Person {
         else if (Input.GetKeyDown(KeyCode.DownArrow)) Attack(MG_Sides.Side.down); // Attack Down
         else if (Input.GetKeyDown(KeyCode.LeftArrow)) Attack(MG_Sides.Side.left); // Attack Left
         else if (Input.GetKeyDown(KeyCode.RightArrow)) Attack(MG_Sides.Side.right); // Attack Right
-        else if (Input.GetKeyDown(KeyCode.Keypad0)) DrinkPotion(); // Drink Potion
+        else if (Input.GetKeyDown("e")) DrinkPotion(); // Drink Potion
 
     }
 
