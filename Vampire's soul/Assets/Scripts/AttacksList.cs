@@ -59,7 +59,7 @@ public static class AttacksList {
             if(hit.tag == "Enemy")
             {
                 hit.GetComponent<Person>().TakeDmg(20);
-                dmg -= 15;
+                dmg -= 10;
             }
         }
         if (debugFlag) Debug.Log("Attack2 Dmg:"+dmg);

@@ -73,7 +73,10 @@ public class Hero : Person {
             attack = AttacksList.Attack1;
             canvasMenager.SelectBite();
             canvasMenager.SetHealthBarGold(currHP / maxHP);
-            
+            waveplane.SetActive(false);
+            blinkplane.SetActive(false);
+
+
         }
         else if (a == 2)
         {
@@ -82,6 +85,7 @@ public class Hero : Person {
                 selectetAbilitie = a;
                 attack = AttacksList.Attack3;
                 canvasMenager.SetHealthBarGold((currHP-5) / maxHP);
+                waveplane.SetActive(false);
                 blinkplane.SetActive(true);
             }
             else
@@ -98,6 +102,7 @@ public class Hero : Person {
                 attack = AttacksList.Attack2;
                 canvasMenager.SetHealthBarGold((currHP - 15) / maxHP);
                 waveplane.SetActive(true);
+                blinkplane.SetActive(false);
             }
             else
             {
@@ -114,6 +119,7 @@ public class Hero : Person {
         RoundSystem.UpdateStep();
         canvasMenager.NextTour();
         if (stun > 0) stun--;
+        Debug.LogError(potion);
     }
 
     protected override void Attack(MG_Sides.Side side)
@@ -180,9 +186,9 @@ public class Hero : Person {
         if(potion < maxPotions)
         {
             audioManager.Play("Ingredient");
-            if (++ingredient >= 2)
+            if (++ingredient >= 3)
             {
-                ingredient -= 2;
+                ingredient -= 3;
                 potion++;
                 // add graphic representation
             }
